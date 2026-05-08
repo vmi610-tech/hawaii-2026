@@ -9,109 +9,140 @@
 <title>🌺 Hawaii 2026 — Family Itinerary</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--ocean:#1a6b7a;--ocean-light:#2899b0;--sand:#f5efe6;--sand-dark:#e8ddd0;--coral:#e05c3a;--coral-light:#f07c5a;--palm:#2d6a4f;--palm-light:#52b788;--gold:#c9922a;--gold-light:#f0b84a;--white:#fefcf8;--ink:#1c1c1e;--ink-soft:#3d3d3f;--ink-muted:#888}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);min-height:100vh;overflow-x:hidden}
-.hero{background:linear-gradient(160deg,#0d3d4a 0%,#1a6b7a 45%,#2899b0 100%);color:white;padding:60px 24px 80px;position:relative;overflow:hidden;text-align:center}
-.hero::before{content:'';position:absolute;bottom:-2px;left:0;right:0;height:60px;background:var(--sand);clip-path:ellipse(60% 100% at 50% 100%)}
-.hero-wave{position:absolute;top:0;left:0;right:0;bottom:0;opacity:.06;background-image:repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(255,255,255,.3) 20px,rgba(255,255,255,.3) 21px)}
-.hero-emoji{font-size:3rem;display:block;margin-bottom:12px;animation:float 4s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,3.8rem);font-weight:700;letter-spacing:-.5px;line-height:1.1;margin-bottom:8px}
-.hero-sub{font-size:1rem;opacity:.75;font-weight:300;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px}
-.hotel-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.hotel-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:6px 14px;font-size:.72rem;letter-spacing:.5px;font-weight:500;backdrop-filter:blur(4px);color:white;cursor:pointer;transition:background .15s,border-color .15s}
-.hotel-chip span{opacity:.6;margin-right:4px}
-.quick-links{background:var(--ocean);color:white;padding:0 16px;display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
-.quick-links::-webkit-scrollbar{display:none}
-.quick-link{padding:12px 14px;font-size:.7rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;opacity:.7;color:white;text-decoration:none;display:flex;align-items:center;gap:5px;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
-.quick-link:hover,.quick-link.active{opacity:1;border-bottom-color:var(--gold-light)}
-.container{max-width:800px;margin:0 auto;padding:32px 16px 80px}
-.island-label{font-family:'DM Mono',monospace;font-size:.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--ocean);margin:40px 0 12px;display:flex;align-items:center;gap:10px}
-.island-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--ocean-light),transparent);opacity:.3}
-.day-card{background:var(--white);border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);transition:box-shadow .2s}
-.day-header{display:flex;align-items:center;padding:16px 20px;cursor:pointer;gap:14px;user-select:none;-webkit-tap-highlight-color:transparent}
-.day-date{display:flex;flex-direction:column;align-items:center;background:var(--ocean);color:white;border-radius:10px;padding:6px 10px;min-width:44px;flex-shrink:0}
-.day-date .month{font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;opacity:.8}
-.day-date .num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;line-height:1}
-.day-meta{flex:1}
-.day-dow{font-size:.65rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:2px}
-.day-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.2}
-.day-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.pill{font-size:.6rem;font-weight:500;padding:2px 7px;border-radius:100px;letter-spacing:.3px}
-.pill-coral{background:#fde8e2;color:var(--coral)}
-.pill-ocean{background:#e0f2f7;color:var(--ocean)}
-.pill-palm{background:#e0f0e8;color:var(--palm)}
-.pill-gold{background:#fdf3e0;color:var(--gold)}
-.pill-warn{background:#fff3e0;color:#c85000}
-.chevron{color:var(--ink-muted);font-size:.8rem;transition:transform .25s;flex-shrink:0}
-.day-card.open .chevron{transform:rotate(90deg)}
-.day-body{display:none;padding:0 20px 20px;border-top:1px solid var(--sand-dark)}
-.day-card.open .day-body{display:block}
-.segment{margin-top:18px}
-.segment-label{font-size:.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.segment-label::after{content:'';flex:1;height:1px;background:var(--sand-dark)}
-.item{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
-.item-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;margin-top:1px}
-.item-icon.dining{background:#fde8e2}
-.item-icon.activity{background:#e0f2f7}
-.item-icon.transport{background:#f0e8ff}
-.item-icon.hotel{background:#fff3e0}
-.item-icon.warn{background:#fff3e0}
-.item-icon.tip{background:#e0f0e8}
-.item-content{flex:1}
-.item-name{font-weight:500;font-size:.88rem;color:var(--ink);line-height:1.3}
-.item-detail{font-size:.78rem;color:var(--ink-soft);margin-top:2px;line-height:1.5}
-.item-time{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--ocean);font-weight:500;margin-top:2px}
-.item-status{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:500;padding:2px 7px;border-radius:100px;margin-top:4px}
-.status-booked{background:#e0f0e8;color:var(--palm)}
-.status-warn{background:#fff3e0;color:#c85000}
-a.booking-link{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:500;color:var(--ocean);text-decoration:none;margin-top:4px;padding:3px 8px;background:#e0f2f7;border-radius:6px;transition:background .15s}
-.hana-section{border:1px solid var(--sand-dark);border-radius:12px;margin-bottom:8px;overflow:hidden}
-.hana-section-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;background:var(--sand);user-select:none;-webkit-tap-highlight-color:transparent;gap:10px}
-.hana-section-header:hover{background:var(--sand-dark)}
-.hana-section-title{font-size:.78rem;font-weight:600;color:var(--ink);flex:1}
-.hana-section-sub{font-size:.65rem;color:var(--ink-muted);font-weight:400;margin-left:6px}
-.hana-chevron{color:var(--ink-muted);font-size:.7rem;transition:transform .22s;flex-shrink:0}
-.hana-section.open .hana-chevron{transform:rotate(90deg)}
-.hana-body{display:none;padding:10px 12px 12px}
-.hana-section.open .hana-body{display:block}
-.mm-grid{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-.mm-stop{border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
-.mm-stop.must{background:linear-gradient(135deg,#e0f0e8,#edf7f2);border-left:3px solid var(--palm)}
-.mm-stop.optional{background:#f5f9fc;border-left:3px solid var(--ocean-light)}
-.mm-stop.food{background:#fef6ee;border-left:3px solid var(--coral-light)}
-.mm-badge{font-family:'DM Mono',monospace;font-size:.6rem;font-weight:500;background:rgba(0,0,0,.08);padding:2px 6px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-top:2px}
-.mm-content{flex:1}
-.mm-name{font-weight:600;font-size:.82rem;color:var(--ink)}
-.mm-detail{font-size:.74rem;color:var(--ink-soft);margin-top:2px;line-height:1.45}
-.mm-tag{display:inline-flex;font-size:.58rem;font-weight:600;padding:1px 6px;border-radius:100px;margin-left:5px;vertical-align:middle}
-.mm-tag.must-tag{background:#c8eedd;color:var(--palm)}
-.mm-tag.tip-tag{background:#e0f2f7;color:var(--ocean)}
-.ref-card{background:var(--ocean);color:white;border-radius:16px;padding:24px 20px;margin-top:32px}
-.ref-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:16px;font-style:italic}
-.ref-section{margin-bottom:20px}
-.ref-section-title{font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;opacity:.6;margin-bottom:8px}
-.ref-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;padding:8px 10px;background:rgba(255,255,255,.08);border-radius:10px;font-size:.8rem}
-.ref-row-icon{flex-shrink:0;font-size:1rem}
-.ref-row-content{flex:1}
-.ref-row-name{font-weight:500;margin-bottom:2px}
-.ref-row-detail{font-size:.71rem;opacity:.7}
-.ref-row-status{font-size:.62rem;font-weight:600;padding:2px 7px;border-radius:100px;flex-shrink:0;align-self:center}
-.ref-status-ok{background:rgba(82,183,136,.3);color:#a8edcb}
-.ref-status-warn{background:rgba(255,180,0,.25);color:#ffe090}
-a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text-decoration:underline;margin-top:3px}
-.reminder-banner{background:linear-gradient(135deg,#c9922a,#e8b44a);color:white;border-radius:14px;padding:16px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
-.reminder-icon{font-size:1.4rem;flex-shrink:0}
-.reminder-title{font-weight:600;font-size:.88rem;margin-bottom:3px}
-.reminder-detail{font-size:.75rem;opacity:.9;line-height:1.4}
-.footer{text-align:center;padding:24px 16px;color:var(--ink-muted);font-size:.72rem;border-top:1px solid var(--sand-dark);margin-top:40px}
-.bday-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--coral),var(--coral-light));color:white;font-size:.65rem;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.5px}
-.scroll-anchor{scroll-margin-top:50px}
-@media(max-width:480px){.hero{padding:48px 16px 72px}.container{padding:24px 12px 60px}.day-header{padding:14px 16px}.day-body{padding:0 16px 16px}}
+:root {
+--ocean: #1a6b7a;
+--ocean-light: #2899b0;
+--sand: #f5efe6;
+--sand-dark: #e8ddd0;
+--coral: #e05c3a;
+--coral-light: #f07c5a;
+--palm: #2d6a4f;
+--palm-light: #52b788;
+--gold: #c9922a;
+--gold-light: #f0b84a;
+--white: #fefcf8;
+--ink: #1c1c1e;
+--ink-soft: #3d3d3f;
+--ink-muted: #888;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+.hero { background: linear-gradient(160deg, #0d3d4a 0%, #1a6b7a 45%, #2899b0 100%); color: white; padding: 60px 24px 80px; position: relative; overflow: hidden; text-align: center; }
+.hero::before { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 60px; background: var(--sand); clip-path: ellipse(60% 100% at 50% 100%); }
+.hero-wave { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.06; background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.3) 20px, rgba(255,255,255,0.3) 21px); }
+.hero-emoji { font-size: 3rem; display: block; margin-bottom: 12px; animation: float 4s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 700; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 8px; }
+.hero-sub { font-size: 1rem; opacity: 0.75; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
+.hotel-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.hotel-chip { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 6px 14px; font-size: 0.72rem; letter-spacing: 0.5px; font-weight: 500; backdrop-filter: blur(4px); color: white; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.hotel-chip:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.5); }
+.hotel-chip span { opacity: 0.6; margin-right: 4px; }
+.quick-links { background: var(--ocean); color: white; padding: 0 16px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.quick-links::-webkit-scrollbar { display: none; }
+.quick-link { padding: 12px 14px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; opacity: 0.7; color: white; text-decoration: none; display: flex; align-items: center; gap: 5px; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
+.quick-link:hover, .quick-link.active { opacity: 1; border-bottom-color: var(--gold-light); }
+.container { max-width: 800px; margin: 0 auto; padding: 32px 16px 80px; }
+.island-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--ocean); margin: 40px 0 12px; display: flex; align-items: center; gap: 10px; }
+.island-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--ocean-light), transparent); opacity: 0.3; }
+.day-card { background: var(--white); border-radius: 16px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
+.day-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06); }
+.day-header { display: flex; align-items: center; padding: 16px 20px; cursor: pointer; gap: 14px; user-select: none; -webkit-tap-highlight-color: transparent; }
+.day-date { display: flex; flex-direction: column; align-items: center; background: var(--ocean); color: white; border-radius: 10px; padding: 6px 10px; min-width: 44px; flex-shrink: 0; }
+.day-date .month { font-size: 0.55rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; opacity: 0.8; }
+.day-date .num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; line-height: 1; }
+.day-meta { flex: 1; }
+.day-dow { font-size: 0.65rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2px; }
+.day-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.day-pills { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+.pill { font-size: 0.6rem; font-weight: 500; padding: 2px 7px; border-radius: 100px; letter-spacing: 0.3px; }
+.pill-coral { background: #fde8e2; color: var(--coral); }
+.pill-ocean { background: #e0f2f7; color: var(--ocean); }
+.pill-palm { background: #e0f0e8; color: var(--palm); }
+.pill-gold { background: #fdf3e0; color: var(--gold); }
+.pill-warn { background: #fff3e0; color: #c85000; }
+.chevron { color: var(--ink-muted); font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
+.day-card.open .chevron { transform: rotate(90deg); }
+.day-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--sand-dark); }
+.day-card.open .day-body { display: block; }
+.segment { margin-top: 18px; }
+.segment-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.segment-label::after { content: ''; flex: 1; height: 1px; background: var(--sand-dark); }
+.item { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+.item-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; margin-top: 1px; }
+.item-icon.dining { background: #fde8e2; }
+.item-icon.activity { background: #e0f2f7; }
+.item-icon.transport { background: #f0e8ff; }
+.item-icon.hotel { background: #fff3e0; }
+.item-icon.warn { background: #fff3e0; }
+.item-icon.tip { background: #e0f0e8; }
+.item-content { flex: 1; }
+.item-name { font-weight: 500; font-size: 0.88rem; color: var(--ink); line-height: 1.3; }
+.item-detail { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; line-height: 1.5; }
+.item-time { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--ocean); font-weight: 500; margin-top: 2px; }
+.item-status { display: inline-flex; align-items: center; gap: 4px; font-size: 0.65rem; font-weight: 500; padding: 2px 7px; border-radius: 100px; margin-top: 4px; }
+.status-booked { background: #e0f0e8; color: var(--palm); }
+.status-warn { background: #fff3e0; color: #c85000; }
+a.booking-link { display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 500; color: var(--ocean); text-decoration: none; margin-top: 4px; padding: 3px 8px; background: #e0f2f7; border-radius: 6px; transition: background 0.15s; }
+a.booking-link:hover { background: #c0e8f3; }
+
+/* Hana sub-accordion */
+.hana-section { border: 1px solid var(--sand-dark); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+.hana-section-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; cursor: pointer; background: var(--sand); user-select: none; -webkit-tap-highlight-color: transparent; gap: 10px; }
+.hana-section-header:hover { background: var(--sand-dark); }
+.hana-section-title { font-size: 0.78rem; font-weight: 600; color: var(--ink); flex: 1; }
+.hana-section-sub { font-size: 0.65rem; color: var(--ink-muted); font-weight: 400; margin-left: 6px; }
+.hana-chevron { color: var(--ink-muted); font-size: 0.7rem; transition: transform 0.22s; flex-shrink: 0; }
+.hana-section.open .hana-chevron { transform: rotate(90deg); }
+.hana-body { display: none; padding: 10px 12px 12px; }
+.hana-section.open .hana-body { display: block; }
+
+/* Mile marker stop cards for Hana */
+.mm-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.mm-stop { border-radius: 10px; padding: 10px 12px; display: flex; gap: 10px; align-items: flex-start; }
+.mm-stop.must { background: linear-gradient(135deg, #e0f0e8, #edf7f2); border-left: 3px solid var(--palm); }
+.mm-stop.optional { background: #f5f9fc; border-left: 3px solid var(--ocean-light); }
+.mm-stop.food { background: #fef6ee; border-left: 3px solid var(--coral-light); }
+.mm-stop.warn { background: #fffbf0; border-left: 3px solid var(--gold); }
+.mm-badge { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; background: rgba(0,0,0,0.08); padding: 2px 6px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+.mm-content { flex: 1; }
+.mm-name { font-weight: 600; font-size: 0.82rem; color: var(--ink); }
+.mm-detail { font-size: 0.74rem; color: var(--ink-soft); margin-top: 2px; line-height: 1.45; }
+.mm-tag { display: inline-flex; font-size: 0.58rem; font-weight: 600; padding: 1px 6px; border-radius: 100px; margin-left: 5px; vertical-align: middle; }
+.mm-tag.must-tag { background: #c8eedd; color: var(--palm); }
+.mm-tag.tip-tag { background: #e0f2f7; color: var(--ocean); }
+
+.ref-card { background: var(--ocean); color: white; border-radius: 16px; padding: 24px 20px; margin-top: 32px; }
+.ref-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 16px; font-style: italic; }
+.ref-section { margin-bottom: 20px; }
+.ref-section-title { font-size: 0.6rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500; opacity: 0.6; margin-bottom: 8px; }
+.ref-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; padding: 8px 10px; background: rgba(255,255,255,0.08); border-radius: 10px; font-size: 0.8rem; }
+.ref-row-icon { flex-shrink: 0; font-size: 1rem; }
+.ref-row-content { flex: 1; }
+.ref-row-name { font-weight: 500; margin-bottom: 2px; }
+.ref-row-detail { font-size: 0.71rem; opacity: 0.7; }
+.ref-row-status { font-size: 0.62rem; font-weight: 600; padding: 2px 7px; border-radius: 100px; flex-shrink: 0; align-self: center; }
+.ref-status-ok { background: rgba(82,183,136,0.3); color: #a8edcb; }
+.ref-status-warn { background: rgba(255,180,0,0.25); color: #ffe090; }
+a.ref-link { display: inline-block; font-size: 0.68rem; color: rgba(255,255,255,0.7); text-decoration: underline; margin-top: 3px; }
+a.ref-link:hover { color: white; }
+.reminder-banner { background: linear-gradient(135deg, #c9922a, #e8b44a); color: white; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start; }
+.reminder-icon { font-size: 1.4rem; flex-shrink: 0; }
+.reminder-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 3px; }
+.reminder-detail { font-size: 0.75rem; opacity: 0.9; line-height: 1.4; }
+.footer { text-align: center; padding: 24px 16px; color: var(--ink-muted); font-size: 0.72rem; border-top: 1px solid var(--sand-dark); margin-top: 40px; }
+.bday-badge { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, var(--coral), var(--coral-light)); color: white; font-size: 0.65rem; font-weight: 600; padding: 3px 9px; border-radius: 100px; letter-spacing: 0.5px; }
+.scroll-anchor { scroll-margin-top: 50px; }
+@media (max-width: 480px) {
+  .hero { padding: 48px 16px 72px; }
+  .container { padding: 24px 12px 60px; }
+  .day-header { padding: 14px 16px; }
+  .day-body { padding: 0 16px 16px; }
+}
 </style>
 </head>
 <body>
+
 <div class="hero">
   <div class="hero-wave"></div>
   <span class="hero-emoji">🌺</span>
@@ -121,6 +152,7 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
     <div class="hotel-chip" onclick="jumpToDay('jul23')"><span>📍</span> Outrigger Reef Waikiki · Jul 23–28</div>
     <div class="hotel-chip" onclick="jumpToDay('jul28')"><span>📍</span> Wailea Marriott · Jul 28–Aug 2</div>
     <div class="hotel-chip" onclick="jumpToDay('aug2')"><span>📍</span> Four Seasons Maui · Aug 2–5</div>
+  </div>
   </div>
 </div>
 
@@ -145,75 +177,158 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
 </div>
 
 <div class="container">
-  <div class="reminder-banner"><div class="reminder-icon">⏰</div><div><div class="reminder-title">Next: May 31 @ 3 PM HST</div><div class="reminder-detail">Pearl Harbor / USS Arizona — recreation.gov · 56-day window, sells out in minutes!</div></div></div>
-  <div class="reminder-banner"><div class="reminder-icon">📅</div><div><div class="reminder-title">Coming up: July 1</div><div class="reminder-detail">Wai'anapanapa Black Sand Beach (Jul 31) — gostateparks.hawaii.gov · $10/vehicle + $5/person · morning slot</div></div></div>
+
+  <div class="reminder-banner">
+    <div class="reminder-icon">⏰</div>
+    <div class="reminder-content">
+      <div class="reminder-title">Next booking action: May 31 @ 3 PM HST</div>
+      <div class="reminder-detail">Pearl Harbor / USS Arizona Memorial — recreation.gov (56-day window, sells out in minutes — have your account ready!)</div>
+    </div>
+  </div>
+
+  <div class="reminder-banner">
+    <div class="reminder-icon">📅</div>
+    <div class="reminder-content">
+      <div class="reminder-title">Coming up: July 1</div>
+      <div class="reminder-detail">Wai'anapanapa Black Sand Beach (Jul 31) — book at gostateparks.hawaii.gov · $10/vehicle + $5/person · morning slot</div>
+    </div>
+  </div>
 
   <div class="island-label" id="oahu">🌴 O'ahu — Outrigger Reef Waikiki</div>
 
+  <!-- JUL 23 -->
   <div class="day-card scroll-anchor" id="jul23">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date"><span class="month">Jul</span><span class="num">23</span></div><div class="day-meta"><div class="day-dow">Thursday</div><div class="day-title">Arrival Day ✈️</div><div class="day-pills"><span class="pill pill-ocean">Travel</span><span class="pill pill-gold">Check-in</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date"><span class="month">Jul</span><span class="num">23</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Thursday</div>
+        <div class="day-title">Arrival Day ✈️</div>
+        <div class="day-pills"><span class="pill pill-ocean">Travel</span><span class="pill pill-gold">Check-in</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">✈️ Flights</div>
+      <div class="segment">
+        <div class="segment-label">✈️ Flights</div>
         <div class="item"><div class="item-icon transport">✈️</div><div class="item-content"><div class="item-name">AA2408 · PHL → LAX</div><div class="item-time">11:00 AM EDT → 1:46 PM PDT</div></div></div>
         <div class="item"><div class="item-icon transport">✈️</div><div class="item-content"><div class="item-name">AA143 · LAX → HNL</div><div class="item-time">3:55 PM PDT → 6:41 PM HST</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🏨 Check-In</div>
-        <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">OUTRIGGER Reef Waikiki Beach Resort</div><div class="item-detail">2169 Kalia Rd · Conf: CI5JRDUQ</div></div></div>
+      <div class="segment">
+        <div class="segment-label">🏨 Check-In</div>
+        <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">OUTRIGGER Reef Waikiki Beach Resort</div><div class="item-detail">2169 Kalia Rd, Honolulu · Conf: CI5JRDUQ</div></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🌺 Evening</div>
+        <div class="item"><div class="item-icon tip">🚶</div><div class="item-content"><div class="item-name">Settle in, grab dinner nearby</div><div class="item-detail">Walk along Waikiki Beach — easy first evening</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 24 -->
   <div class="day-card scroll-anchor" id="jul24">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date"><span class="month">Jul</span><span class="num">24</span></div><div class="day-meta"><div class="day-dow">Friday</div><div class="day-title">Waikiki Explore 🛍️</div><div class="day-pills"><span class="pill pill-coral">Duke's Booked</span><span class="pill pill-palm">Free Hula Show</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date"><span class="month">Jul</span><span class="num">24</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Friday</div>
+        <div class="day-title">Waikiki Explore 🛍️</div>
+        <div class="day-pills"><span class="pill pill-coral">Duke's Booked</span><span class="pill pill-palm">Free Hula Show</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🍽 Lunch</div>
+      <div class="segment">
+        <div class="segment-label">🍽 Lunch</div>
         <div class="item"><div class="item-icon dining">🍽</div><div class="item-content"><div class="item-name">Duke's Waikiki</div><div class="item-time">1:30 PM</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.dukeswaikiki.com" target="_blank">↗ dukeswaikiki.com</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🌺 Evening</div>
+      <div class="segment">
+        <div class="segment-label">🛍 Afternoon</div>
+        <div class="item"><div class="item-icon activity">🛍</div><div class="item-content"><div class="item-name">International Marketplace</div><div class="item-detail">Shopping & explore Waikiki</div></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🌺 Evening</div>
         <div class="item"><div class="item-icon activity">💃</div><div class="item-content"><div class="item-name">Free Hula Show · International Marketplace</div><div class="item-time">6:00 PM — no reservation needed</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 25 -->
   <div class="day-card scroll-anchor" id="jul25">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:linear-gradient(135deg,#e05c3a,#f07c5a)"><span class="month">Jul</span><span class="num">25</span></div><div class="day-meta"><div class="day-dow">Saturday</div><div class="day-title">Elisabeth's Birthday 🎂 <span class="bday-badge">🎂 Birthday</span></div><div class="day-pills"><span class="pill pill-ocean">Hanauma Bay AM</span><span class="pill pill-coral">3 Reservations</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: linear-gradient(135deg, #e05c3a, #f07c5a);"><span class="month">Jul</span><span class="num">25</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Saturday</div>
+        <div class="day-title">Elisabeth's Birthday 🎂 <span class="bday-badge">🎂 Birthday</span></div>
+        <div class="day-pills"><span class="pill pill-ocean">Hanauma Bay AM</span><span class="pill pill-coral">3 Reservations</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🌊 Morning</div>
-        <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content"><div class="item-name">Hanauma Bay Snorkeling</div><div class="item-detail">Book Jul 23 @ 7:00 AM HST — slots sell out in minutes! $25/person + $3 parking.</div><div class="item-status status-warn">⚠ Book Jul 23 @ 7 AM HST</div><a class="booking-link" href="http://honolulu.gov/dpr" target="_blank">↗ honolulu.gov/dpr</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🌊 Morning</div>
+        <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content"><div class="item-name">Hanauma Bay Snorkeling</div><div class="item-detail">Book Thursday July 23 at 7:00 AM HST — slots sell out in minutes! Mandatory 9-min orientation video before water. $25/person + $3 parking.</div><div class="item-status status-warn">⚠ Book Jul 23 @ 7 AM HST</div><a class="booking-link" href="http://honolulu.gov/dpr" target="_blank">↗ honolulu.gov/dpr</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🌅 Adults Only Happy Hour</div>
-        <div class="item"><div class="item-icon dining">🥂</div><div class="item-content"><div class="item-name">House Without a Key — Halekulani Hotel</div><div class="item-time">5:30 PM · just the two of you</div><div class="item-detail">Hula show 6–8 PM · Sunset ~7:15 PM</div><div class="item-status status-booked">✓ Booked via OpenTable</div><a class="booking-link" href="https://www.halekulani.com/dining/house-without-a-key/" target="_blank">↗ halekulani.com</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🍺 Lunch</div>
+        <div class="item"><div class="item-icon dining">🍺</div><div class="item-content"><div class="item-name">Kona Brewing Hawaii Kai</div><div class="item-detail">1.5 miles from Hanauma Bay — great marina views · 7192 Kalanianaʻole Hwy</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🎂 Birthday Dinner</div>
-        <div class="item"><div class="item-icon dining">🎂</div><div class="item-content"><div class="item-name">Hula Grill Waikiki</div><div class="item-time">8:30 PM · whole family</div><div class="item-detail">Live music 7–9 PM · Elisabeth: Braised Mushroom Ravioli · Famous Hula Pie!</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.hulagrillwaikiki.com" target="_blank">↗ hulagrillwaikiki.com</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🌅 Adults Only Happy Hour</div>
+        <div class="item"><div class="item-icon dining">🥂</div><div class="item-content"><div class="item-name">House Without a Key — Halekulani Hotel</div><div class="item-time">5:30 PM · just the two of you</div><div class="item-detail">Hula show 6–8 PM · Sunset ~7:15 PM · 2199 Kalia Rd</div><div class="item-status status-booked">✓ Booked via OpenTable</div><a class="booking-link" href="https://www.halekulani.com/dining/house-without-a-key/" target="_blank">↗ halekulani.com</a></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🎂 Birthday Dinner (whole family)</div>
+        <div class="item"><div class="item-icon dining">🎂</div><div class="item-content"><div class="item-name">Hula Grill Waikiki</div><div class="item-time">8:30 PM · Outrigger Waikiki Beach Resort</div><div class="item-detail">Live music 7–9 PM · Elisabeth: Braised Mushroom Ravioli · Famous Hula Pie for dessert!</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.hulagrillwaikiki.com" target="_blank">↗ hulagrillwaikiki.com</a></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 26 -->
   <div class="day-card scroll-anchor" id="jul26">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date"><span class="month">Jul</span><span class="num">26</span></div><div class="day-meta"><div class="day-dow">Sunday</div><div class="day-title">Pearl Harbor + North Shore 🏛</div><div class="day-pills"><span class="pill pill-warn">Book May 31</span><span class="pill pill-ocean">North Shore Drive</span></div></div><span class="chevron">›</span></div>
-    <div class="day-body">
-      <div class="segment"><div class="segment-label">🏛 Morning</div>
-        <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content"><div class="item-name">Pearl Harbor / USS Arizona Memorial</div><div class="item-detail">Aim for 8:00 or 8:30 AM slot · Free + $1/person · Optional: Battleship Missouri (~$38), Aviation Museum (~$30), USS Bowfin (~$20)</div><div class="item-status status-warn">⚠ Book May 31 @ 3 PM HST</div><a class="booking-link" href="https://www.recreation.gov" target="_blank">↗ recreation.gov</a></div></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date"><span class="month">Jul</span><span class="num">26</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Sunday</div>
+        <div class="day-title">Pearl Harbor + North Shore 🏛</div>
+        <div class="day-pills"><span class="pill pill-warn">Book May 31</span><span class="pill pill-ocean">North Shore Drive</span></div>
       </div>
-      <div class="segment"><div class="segment-label">🚗 Afternoon — North Shore</div>
-        <div class="item"><div class="item-icon activity">🍧</div><div class="item-content"><div class="item-name">Matsumoto Shave Ice · Haleiwa</div></div></div>
-        <div class="item"><div class="item-icon activity">🌊</div><div class="item-content"><div class="item-name">Waimea Bay</div><div class="item-detail">Jump the famous rock — July surf is flat, safe for swimming.</div></div></div>
+      <span class="chevron">›</span>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="segment-label">🏛 Morning</div>
+        <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content"><div class="item-name">Pearl Harbor / USS Arizona Memorial</div><div class="item-detail">Aim for 8:00 or 8:30 AM slot · Arrive 1–2 hrs early · Free + $1/person fee · Optional: Battleship Missouri (~$38), Aviation Museum (~$30), USS Bowfin (~$20) — walk-in</div><div class="item-status status-warn">⚠ Book May 31 @ 3 PM HST at recreation.gov</div><a class="booking-link" href="https://www.recreation.gov" target="_blank">↗ recreation.gov</a></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🚗 Afternoon — North Shore</div>
+        <div class="item"><div class="item-icon activity">🍧</div><div class="item-content"><div class="item-name">Matsumoto Shave Ice · Haleiwa Town</div><div class="item-detail">~1 hr from Pearl Harbor via H2/Kamehameha Hwy</div></div></div>
+        <div class="item"><div class="item-icon activity">🌊</div><div class="item-content"><div class="item-name">Waimea Bay</div><div class="item-detail">Jump the famous rock, swim the bay — July surf is flat, safe for swimming. One of Oahu's most beautiful bays.</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 27 -->
   <div class="day-card scroll-anchor" id="jul27">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date"><span class="month">Jul</span><span class="num">27</span></div><div class="day-meta"><div class="day-dow">Monday</div><div class="day-title">Pali + Lanikai + Kualoa 🎬</div><div class="day-pills"><span class="pill pill-ocean">Kualoa Ranch</span><span class="pill pill-coral">Monkeypod Booked</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date"><span class="month">Jul</span><span class="num">27</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Monday</div>
+        <div class="day-title">Pali + Lanikai + Kualoa 🎬</div>
+        <div class="day-pills"><span class="pill pill-ocean">Kualoa Ranch</span><span class="pill pill-coral">Monkeypod Booked</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🌅 Morning</div>
-        <div class="item"><div class="item-icon activity">🏔</div><div class="item-content"><div class="item-name">Nuʻuanu Pali Lookout</div><div class="item-detail">~30 min stop · panoramic windward views</div></div></div>
-        <div class="item"><div class="item-icon activity">🏖</div><div class="item-content"><div class="item-name">Lanikai Beach</div><div class="item-detail">Fine white sand, crystal clear water. Option: Pillbox Hike.</div></div></div>
+      <div class="segment">
+        <div class="segment-label">🌅 Morning</div>
+        <div class="item"><div class="item-icon activity">🏔</div><div class="item-content"><div class="item-name">Nuʻuanu Pali Lookout</div><div class="item-detail">Drive Pali Hwy (HI-61) over Koʻolau Mountains · ~30 min stop · panoramic windward views</div></div></div>
+        <div class="item"><div class="item-icon activity">🏖</div><div class="item-content"><div class="item-name">Lanikai Beach</div><div class="item-detail">One of Oahu's most beautiful beaches — fine white sand, crystal clear water, calm swimming. Option: Pillbox Hike (~1–1.5 hrs to WWII bunkers + views).</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🎬 Afternoon</div>
-        <div class="item"><div class="item-icon activity">🦕</div><div class="item-content"><div class="item-name">Kualoa Ranch — Hollywood Movie Sites Tour</div><div class="item-detail">90-min open-air bus tour · Jurassic Park, Jumanji, Lost & 200+ film locations</div><div class="item-status status-warn">⚠ Book ASAP — sells out 2–3 weeks ahead</div><a class="booking-link" href="http://kualoa.com" target="_blank">↗ kualoa.com</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🎬 Afternoon</div>
+        <div class="item"><div class="item-icon activity">🦕</div><div class="item-content"><div class="item-name">Kualoa Ranch — Hollywood Movie Sites Tour</div><div class="item-detail">90-min open-air bus tour · Jurassic Park, Jumanji, Lost & 200+ film locations · 49-560 Kamehameha Hwy</div><div class="item-status status-warn">⚠ Book ASAP — sells out 2–3 weeks ahead</div><a class="booking-link" href="http://kualoa.com" target="_blank">↗ kualoa.com</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
         <div class="item"><div class="item-icon dining">🍽</div><div class="item-content"><div class="item-name">Monkeypod Kitchen</div><div class="item-time">7:00 PM</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.monkeypodkitchen.com" target="_blank">↗ monkeypodkitchen.com</a></div></div>
       </div>
     </div>
@@ -221,163 +336,347 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
 
   <div class="island-label" id="maui">🌊 Maui — Wailea → Four Seasons</div>
 
+  <!-- JUL 28 -->
   <div class="day-card scroll-anchor" id="jul28">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--palm)"><span class="month">Jul</span><span class="num">28</span></div><div class="day-meta"><div class="day-dow">Tuesday</div><div class="day-title">Island Transfer → Maui ✈️</div><div class="day-pills"><span class="pill pill-palm">HNL → OGG</span><span class="pill pill-coral">Humuhumunuku Dinner</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--palm)"><span class="month">Jul</span><span class="num">28</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Tuesday</div>
+        <div class="day-title">Island Transfer → Maui ✈️</div>
+        <div class="day-pills"><span class="pill pill-palm">HNL → OGG</span><span class="pill pill-coral">Humuhumunuku Dinner</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">✈️ Flight</div>
+      <div class="segment">
+        <div class="segment-label">🏨 Check-Out</div>
+        <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">OUTRIGGER Reef Waikiki</div><div class="item-time">11:00 AM check-out</div></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">✈️ Flight</div>
         <div class="item"><div class="item-icon transport">✈️</div><div class="item-content"><div class="item-name">AS1116 (Alaska Airlines) · HNL → OGG</div><div class="item-time">2:20 PM → 3:05 PM HST · Conf: CKIPRB</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🏨 Check-In · Maui</div>
-        <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">Wailea Beach Resort — Marriott</div><div class="item-detail">Check-in 4:00 PM · Conf: 74953986</div></div></div>
+      <div class="segment">
+        <div class="segment-label">🏨 Check-In · Maui</div>
+        <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">Wailea Beach Resort — Marriott</div><div class="item-detail">Check-in 4:00 PM · Conf: 74953986</div><a class="booking-link" href="https://www.marriott.com" target="_blank">↗ marriott.com</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
-        <div class="item"><div class="item-icon dining">🌊</div><div class="item-content"><div class="item-name">Humuhumunukunukāpuaʻa</div><div class="item-time">8:00 PM · Grand Wailea (~5 min drive)</div><div class="item-detail">Iconic overwater restaurant · Hawaiian seafood, lagoon & ocean views</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.grandwailea.com/dine/humuhumunukunukuapuaa" target="_blank">↗ grandwailea.com</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
+        <div class="item"><div class="item-icon dining">🌊</div><div class="item-content"><div class="item-name">Humuhumunukunukāpuaʻa</div><div class="item-time">8:00 PM · Grand Wailea (~5 min drive)</div><div class="item-detail">Iconic overwater restaurant · Hawaiian seafood, lagoon & ocean views · 3850 Wailea Alanui Dr</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.grandwailea.com/dine/humuhumunukunukuapuaa" target="_blank">↗ grandwailea.com</a></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 29 -->
   <div class="day-card scroll-anchor" id="jul29">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--palm)"><span class="month">Jul</span><span class="num">29</span></div><div class="day-meta"><div class="day-dow">Wednesday</div><div class="day-title">Molokini Snorkel + Mama's 🐠</div><div class="day-pills"><span class="pill pill-warn">Snorkel Not Booked</span><span class="pill pill-coral">Mama's Booked</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--palm)"><span class="month">Jul</span><span class="num">29</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Wednesday</div>
+        <div class="day-title">Molokini Snorkel + Mama's 🐠</div>
+        <div class="day-pills"><span class="pill pill-warn">Snorkel Not Booked</span><span class="pill pill-coral">Mama's Booked</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🤿 Morning</div>
+      <div class="segment">
+        <div class="segment-label">🤿 Morning</div>
         <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content"><div class="item-name">Molokini Snorkel — Leaning Alii Nui</div><div class="item-detail">$249/person · Mon/Wed/Fri · Departs Maalaea Harbor 7 AM · Spacious boat, patient with new snorkelers, in-water staff. Includes Molokini + Turtle Town.</div><div class="item-status status-warn">⚠ Not booked yet — book ASAP</div><a class="booking-link" href="https://www.sailmaui.com" target="_blank">↗ sailmaui.com (Alii Nui)</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
-        <div class="item"><div class="item-icon dining">🐟</div><div class="item-content"><div class="item-name">Mama's Fish House</div><div class="item-time">5:30 PM · 4 guests · Main Dining</div><div class="item-status status-booked">✓ Booked — Vincent Iacovelli</div><a class="booking-link" href="https://www.mamasfishhouse.com" target="_blank">↗ mamasfishhouse.com</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
+        <div class="item"><div class="item-icon dining">🐟</div><div class="item-content"><div class="item-name">Mama's Fish House</div><div class="item-time">5:30 PM · 4 guests · Main Dining</div><div class="item-status status-booked">✓ Booked under Vincent Iacovelli</div><a class="booking-link" href="https://www.mamasfishhouse.com" target="_blank">↗ mamasfishhouse.com</a></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 30 -->
   <div class="day-card scroll-anchor" id="jul30">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--palm)"><span class="month">Jul</span><span class="num">30</span></div><div class="day-meta"><div class="day-dow">Thursday</div><div class="day-title">Old Lahaina Lu'au Night 🎭</div><div class="day-pills"><span class="pill pill-palm">Lu'au Booked</span><span class="pill pill-ocean">Day Open</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--palm)"><span class="month">Jul</span><span class="num">30</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Thursday</div>
+        <div class="day-title">Old Lahaina Lu'au Night 🎭</div>
+        <div class="day-pills"><span class="pill pill-palm">Lu'au Booked</span><span class="pill pill-ocean">Day Open</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🎭 Evening</div>
+      <div class="segment">
+        <div class="segment-label">🌊 Day</div>
+        <div class="item"><div class="item-icon activity">☀️</div><div class="item-content"><div class="item-name">Day to be planned</div><div class="item-detail">Easy morning — lu'au night ends ~9:15 PM</div></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🎭 Evening</div>
         <div class="item"><div class="item-icon activity">🌺</div><div class="item-content"><div class="item-name">Old Lahaina Lu'au</div><div class="item-time">6:15 PM check-in · 1251 Front Street, Lahaina</div><div class="item-detail">Conf: #8917765 · Party: 3 adults, 1 child · Ends ~9:15 PM</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="https://www.oldlahainaluau.com" target="_blank">↗ oldlahainaluau.com</a></div></div>
       </div>
     </div>
   </div>
 
+  <!-- JUL 31 — ROAD TO HANA (EXPANDED) -->
   <div class="day-card scroll-anchor" id="jul31">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--palm)"><span class="month">Jul</span><span class="num">31</span></div><div class="day-meta"><div class="day-dow">Friday</div><div class="day-title">Road to Hana 🌿</div><div class="day-pills"><span class="pill pill-warn">Black Sand Beach — Book Jul 1</span><span class="pill pill-palm">Full Day · Leave 6:30 AM</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--palm)"><span class="month">Jul</span><span class="num">31</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Friday</div>
+        <div class="day-title">Road to Hana 🌿</div>
+        <div class="day-pills"><span class="pill pill-warn">Black Sand Beach — Book Jul 1</span><span class="pill pill-palm">Full Day · Leave 6:30 AM</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">📋 Logistics</div>
-        <div class="item"><div class="item-icon tip">🗺</div><div class="item-content"><div class="item-name">Leave Wailea 6:30–7:00 AM sharp</div><div class="item-detail">Drive clockwise from Pa'ia (Hwy 36 → 360). Drive back same way — do NOT take rough back road past MM 46. Bring cash — many stops cash only.</div></div></div>
+
+      <div class="segment">
+        <div class="segment-label">📋 Logistics</div>
+        <div class="item"><div class="item-icon tip">🗺</div><div class="item-content">
+          <div class="item-name">Leave Wailea 6:30–7:00 AM sharp</div>
+          <div class="item-detail">Drive clockwise from Pa'ia (Hwy 36 → 360) for best waterfall lighting. Drive back the same way — do NOT take the rough back road past MM 46. Between 1,500–2,000 cars daily; leaving early beats the crowds.</div>
+        </div></div>
+        <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content">
+          <div class="item-name">Car break-ins happen at scenic stops</div>
+          <div class="item-detail">Leave nothing visible. Bring cash — many stops are cash only. Check weather before leaving; rain often clears past Nahiku.</div>
+        </div></div>
       </div>
-      <div class="segment"><div class="segment-label">🗺 Mile-by-Mile Stops <span style="font-size:.6rem;color:var(--ink-muted);font-weight:400;letter-spacing:0;text-transform:none;margin-left:4px">tap to expand</span></div>
+
+      <div class="segment">
+        <div class="segment-label">🗺 Mile-by-Mile Stops <span style="font-size:0.6rem;color:var(--ink-muted);font-weight:400;letter-spacing:0;text-transform:none;margin-left:4px;">tap to expand each section</span></div>
+
         <div class="hana-section open">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>☕</span><span class="hana-section-title">Pa'ia → MM 3 · Starting Out</span><span class="hana-section-sub">2 must-dos</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop must"><span class="mm-badge">Pa'ia</span><div class="mm-content"><div class="mm-name">Pa'ia Town <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Coffee & walk the town. Paia Fish Market for breakfast — go early. Reset odometer at MM 0.</div></div></div>
-            <div class="mm-stop must"><span class="mm-badge">MM 2</span><div class="mm-content"><div class="mm-name">Twin Falls <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Easy hike, great first waterfall for kids. 6–7 falls total — don't linger too long, better ones ahead.</div></div></div>
-            <div class="mm-stop optional"><span class="mm-badge">MM 3</span><div class="mm-content"><div class="mm-name">Rainbow Eucalyptus Trees</div><div class="mm-detail">Left side of road — stunning multicolored bark. Don't hop the fence.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>☕</span>
+            <span class="hana-section-title">Pa'ia → MM 3 · Starting Out</span>
+            <span class="hana-section-sub">2 must-dos</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop must"><span class="mm-badge">Pa'ia</span><div class="mm-content"><div class="mm-name">Pa'ia Town <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Coffee & walk the town. Paia Fish Market for breakfast — go early. Reset your odometer here at MM 0.</div></div></div>
+              <div class="mm-stop must"><span class="mm-badge">MM 2</span><div class="mm-content"><div class="mm-name">Twin Falls <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Easy hike, great first waterfall for kids. 6–7 falls total — don't linger too long, better ones ahead.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 3</span><div class="mm-content"><div class="mm-name">Rainbow Eucalyptus Trees</div><div class="mm-detail">Left side of road — stunning multicolored bark. Pullout just ahead on the right. Don't hop the fence.</div></div></div>
+            </div>
+          </div>
         </div>
+
         <div class="hana-section">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>💧</span><span class="hana-section-title">MM 9–13 · Waterfall Country</span><span class="hana-section-sub">5 stops · restrooms at MM 12</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop optional"><span class="mm-badge">MM 10</span><div class="mm-content"><div class="mm-name">Garden of Eden Arboretum</div><div class="mm-detail">$20/car · Beautiful overlooks, food truck, restrooms. Worth it if not behind schedule.</div></div></div>
-            <div class="mm-stop optional"><span class="mm-badge">MM 12</span><div class="mm-content"><div class="mm-name">Kaumahina State Wayside <span class="mm-tag tip-tag">Free · Restrooms</span></div><div class="mm-detail">Usually less crowded. Short nature loops with dramatic Ke'anae Peninsula view.</div></div></div>
-            <div class="mm-stop optional"><span class="mm-badge">MM 13</span><div class="mm-content"><div class="mm-name">Punalau Falls (Hidden Gem)</div><div class="mm-detail">Tiny turnout on far side of bridge. Rarely written about — good chance of having it to yourself.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>💧</span>
+            <span class="hana-section-title">MM 9–13 · Waterfall Country</span>
+            <span class="hana-section-sub">5 stops · restrooms at MM 12</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop optional"><span class="mm-badge">MM 9–10</span><div class="mm-content"><div class="mm-name">Waikamoi Nature Trail</div><div class="mm-detail">Two loops (10 & 30 min) — good stretch break, up to 200 ft gain. Not a must.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 10</span><div class="mm-content"><div class="mm-name">Garden of Eden Arboretum</div><div class="mm-detail">$20/car · Beautiful overlooks, food truck (smoothies, coffee), restrooms. Worth it if not behind schedule.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 11</span><div class="mm-content"><div class="mm-name">Haipua'ena Falls</div><div class="mm-detail">Short trail to a small waterfall. Second larger falls upstream but trail can be slippery.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 12</span><div class="mm-content"><div class="mm-name">Kaumahina State Wayside <span class="mm-tag tip-tag">Free · Restrooms</span></div><div class="mm-detail">Usually less crowded than Garden of Eden. Short nature loops with dramatic Ke'anae Peninsula view.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 13</span><div class="mm-content"><div class="mm-name">Punalau Falls (Hidden Gem)</div><div class="mm-detail">Tiny turnout on far side of bridge. Rarely written about — good chance of having it to yourself.</div></div></div>
+            </div>
+          </div>
         </div>
+
         <div class="hana-section">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>🌿</span><span class="hana-section-title">MM 14–17 · Ke'anae Peninsula</span><span class="hana-section-sub">Aunty Sandy's + swimming</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop must"><span class="mm-badge">MM 16</span><div class="mm-content"><div class="mm-name">Aunty Sandy's Banana Bread <span class="mm-tag must-tag">⭐ Don't Skip</span></div><div class="mm-detail">Cash only. Best banana bread on the road. Sandwiches, beverages, snacks too.</div></div></div>
-            <div class="mm-stop optional"><span class="mm-badge">MM 17</span><div class="mm-content"><div class="mm-name">Ching's Pond <span class="mm-tag tip-tag">🏊 Swimming</span></div><div class="mm-detail">Marvelous pool. Parking extremely limited — 2–3 cars on ocean side ~80 yds before hairpin. Locals cliff dive here.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>🌿</span>
+            <span class="hana-section-title">MM 14–17 · Ke'anae Peninsula</span>
+            <span class="hana-section-sub">Aunty Sandy's + swimming</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop optional"><span class="mm-badge">MM 14+</span><div class="mm-content"><div class="mm-name">Honomanu Bay Viewpoint</div><div class="mm-detail">Long pullout ~0.5 mi past MM 14. Tranquil view of bay and valley. Beach below is gravelly with poor swimming.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 15–16</span><div class="mm-content"><div class="mm-name">Ke'anae Arboretum</div><div class="mm-detail">25–30 min stroll, paved then unpaved. Skip if pressed for time.</div></div></div>
+              <div class="mm-stop must"><span class="mm-badge">MM 16</span><div class="mm-content"><div class="mm-name">Aunty Sandy's Banana Bread <span class="mm-tag must-tag">⭐ Don't Skip</span></div><div class="mm-detail">Cash only. One of the best banana bread stops on the road. Sandwiches, beverages, snacks too.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 17</span><div class="mm-content"><div class="mm-name">Ching's Pond <span class="mm-tag tip-tag">🏊 Swimming</span></div><div class="mm-detail">Marvelous pool with great swimming. Parking extremely limited — 2–3 cars on ocean side ~80 yds before hairpin curve. Locals cliff dive here.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 17</span><div class="mm-content"><div class="mm-name">Halfway to Hana Stand</div><div class="mm-detail">You're actually two-thirds of the way. Fruits, beverages, snacks.</div></div></div>
+            </div>
+          </div>
         </div>
+
         <div class="hana-section">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>🌊</span><span class="hana-section-title">MM 18–22 · Wailua & More Waterfalls</span><span class="hana-section-sub">Three Bears + swim stop</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop must"><span class="mm-badge">MM 19–20</span><div class="mm-content"><div class="mm-name">Upper Waikani Falls (Three Bears) <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Three-tiered, spectacular after rain. Visible from bridge — mauka side. Police actively ticketing No Parking violators here.</div></div></div>
-            <div class="mm-stop optional"><span class="mm-badge">MM 22</span><div class="mm-content"><div class="mm-name">Pua'a Ka'a State Wayside <span class="mm-tag tip-tag">Restrooms</span></div><div class="mm-detail">Two small waterfalls + a spring-fed pool (cold!). Restrooms here.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>🌊</span>
+            <span class="hana-section-title">MM 18–22 · Wailua & More Waterfalls</span>
+            <span class="hana-section-sub">Three Bears + swim stop</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop optional"><span class="mm-badge">MM 18–19</span><div class="mm-content"><div class="mm-name">Wailua Valley State Wayside</div><div class="mm-detail">Stairs right for ocean view, stairs left for Ko'olau Gap (dramatic when clear). Taro fields of Wailua below.</div></div></div>
+              <div class="mm-stop must"><span class="mm-badge">MM 19–20</span><div class="mm-content"><div class="mm-name">Upper Waikani Falls (Three Bears) <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Three-tiered, spectacular after rain. Visible from the bridge — mauka side. Police actively ticketing No Parking violators here.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 21</span><div class="mm-content"><div class="mm-name">Wailua Iki Road</div><div class="mm-detail">10-min walk to a nice waterfall, pool, and gorgeous valley. State land.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 22</span><div class="mm-content"><div class="mm-name">Pua'a Ka'a State Wayside <span class="mm-tag tip-tag">Restrooms</span></div><div class="mm-detail">Two small waterfalls + a spring-fed pool (cold!). Restrooms here. Stream often dry ahead.</div></div></div>
+            </div>
+          </div>
         </div>
+
         <div class="hana-section">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>🍜</span><span class="hana-section-title">MM 23–29 · Nahiku & Food Stops</span><span class="hana-section-sub">Marketplace + waterfall bridges</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop optional"><span class="mm-badge">MM 25</span><div class="mm-content"><div class="mm-name">Makapipi Falls (Bridge Lookdown)</div><div class="mm-detail">Walk to middle of bridge, ocean side — look straight down. Be very careful; seasonal, dry about half the time.</div></div></div>
-            <div class="mm-stop food"><span class="mm-badge">MM 29</span><div class="mm-content"><div class="mm-name">Nahiku Marketplace 🍽</div><div class="mm-detail">Half-dozen stands — Island Chef (fish & chips, shrimp), Nahiku Café (coconut cake!). Good snack stop before Hana.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>🍜</span>
+            <span class="hana-section-title">MM 23–29 · Nahiku & Food Stops</span>
+            <span class="hana-section-sub">Marketplace + waterfall bridges</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop optional"><span class="mm-badge">MM 24</span><div class="mm-content"><div class="mm-name">Hanawi Falls</div><div class="mm-detail">Pretty waterfall from bridge. Guardrail is shorter than it looks — don't sit on it.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 25</span><div class="mm-content"><div class="mm-name">Makapipi Falls (Bridge Lookdown)</div><div class="mm-detail">Walk to middle of bridge, ocean side — look straight down to see falls plunge into pool. Be very careful; seasonal, dry about half the time.</div></div></div>
+              <div class="mm-stop food"><span class="mm-badge">MM 29</span><div class="mm-content"><div class="mm-name">Nahiku Marketplace 🍽</div><div class="mm-detail">Half-dozen stands — Island Chef (fish & chips, shrimp), Nahiku Café (coconut cake!). Good snack stop before Hana.</div></div></div>
+            </div>
+          </div>
         </div>
+
         <div class="hana-section">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>🏖</span><span class="hana-section-title">MM 31–34 · Final Push to Hana</span><span class="hana-section-sub">Black sand beach + Red Sand Beach</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop must"><span class="mm-badge">MM 32</span><div class="mm-content"><div class="mm-name">Wai'anapanapa Black Sand Beach <span class="mm-tag must-tag">⭐ Must · Reserved</span></div><div class="mm-detail">$10/vehicle + $5/person · Reservation required (book July 1). Volcanic black sand, sea arch, coastal trail.</div><a class="booking-link" href="https://gostateparks.hawaii.gov" target="_blank">↗ gostateparks.hawaii.gov</a></div></div>
-            <div class="mm-stop must"><span class="mm-badge">MM 34</span><div class="mm-content"><div class="mm-name">Hana Town + Red Sand Beach <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Park on Uakea Rd near Hana Maui Hotel. ~10 min on loose red cinders — wear real shoes. Stunning crimson cove.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>🏖</span>
+            <span class="hana-section-title">MM 31–34 · Final Push to Hana</span>
+            <span class="hana-section-sub">Black sand beach + Red Sand Beach</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop optional"><span class="mm-badge">MM 31</span><div class="mm-content"><div class="mm-name">Hana Lava Tube (Ka'eleku Cave)</div><div class="mm-detail">$15/person self-guided · 0.25 mi of a 2-mile tube. Kids love it — bring a flashlight. Drive 0.4 mi on Ulaino Rd.</div></div></div>
+              <div class="mm-stop must"><span class="mm-badge">MM 32</span><div class="mm-content"><div class="mm-name">Wai'anapanapa Black Sand Beach <span class="mm-tag must-tag">⭐ Must · Reserved</span></div><div class="mm-detail">$10/vehicle + $5/person · Reservation required (book July 1). Arrive within 30 min of slot. Volcanic black sand, sea arch, coastal trail. Don't swim in high surf.</div><a class="booking-link" href="https://gostateparks.hawaii.gov" target="_blank">↗ gostateparks.hawaii.gov</a></div></div>
+              <div class="mm-stop must"><span class="mm-badge">MM 34</span><div class="mm-content"><div class="mm-name">Hana Town + Red Sand Beach <span class="mm-tag must-tag">⭐ Must</span></div><div class="mm-detail">Park on Uakea Rd near Hana Maui Hotel. Past baseball field (right) + school (left) to dead end — yellow gate left, trail right. ~10 min on loose red cinders — wear real shoes. Stunning crimson cove. Calm seas only for swimming.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">Hana Bay</span><div class="mm-content"><div class="mm-name">Hana Bay + Ka'uiki Head Trail</div><div class="mm-detail">Safest swimming in Hana. Trail leads ~200 yds to Ka'uiki Head. Good snorkeling near the islet when calm.</div></div></div>
+            </div>
+          </div>
         </div>
+
         <div class="hana-section">
-          <div class="hana-section-header" onclick="toggleHana(this)"><span>🏄</span><span class="hana-section-title">Past Hana · Koki, Hamoa & Pools</span><span class="hana-section-sub">Paved only · MM 34–42</span><span class="hana-chevron">›</span></div>
-          <div class="hana-body"><div class="mm-grid">
-            <div class="mm-stop optional"><span class="mm-badge">Near Hana</span><div class="mm-content"><div class="mm-name">Koki Beach + Hamoa Beach</div><div class="mm-detail">Koki: black + white sand, sea arch view. Hamoa: guide's #1 beach on Maui — best bodysurfing. Don't snorkel here.</div></div></div>
-            <div class="mm-stop food"><span class="mm-badge">Hana Town</span><div class="mm-content"><div class="mm-name">Braddah Hutts BBQ / Hana Ranch Restaurant 🍽</div><div class="mm-detail">Braddah Hutts: BBQ pork & chicken, $15–$20, cash only, closed weekends. Hana Ranch: burgers & salads $20–$45.</div></div></div>
-            <div class="mm-stop optional"><span class="mm-badge">MM 42</span><div class="mm-content"><div class="mm-name">Seven Sacred Pools / Ohe'o Gulch</div><div class="mm-detail">⚠ Verify NPS access at nps.gov/hale — sometimes closed. Leave Hana by 3:00–3:30 PM to make dinner.</div></div></div>
-          </div></div>
+          <div class="hana-section-header" onclick="toggleHana(this)">
+            <span>🏄</span>
+            <span class="hana-section-title">Past Hana · Koki, Hamoa & Pools</span>
+            <span class="hana-section-sub">Paved only · MM 34–42</span>
+            <span class="hana-chevron">›</span>
+          </div>
+          <div class="hana-body">
+            <div class="mm-grid">
+              <div class="mm-stop optional"><span class="mm-badge">Near Hana</span><div class="mm-content"><div class="mm-name">Koki Beach + Hamoa Beach</div><div class="mm-detail">Koki: black + white sand, sea arch view, boogie boarding when calm. Hamoa: guide's #1 beach on Maui — fine salt-and-pepper sand, best bodysurfing. No reef so waves pack power. Don't snorkel here.</div></div></div>
+              <div class="mm-stop food"><span class="mm-badge">Hana Town</span><div class="mm-content"><div class="mm-name">Braddah Hutts BBQ / Hana Ranch Restaurant 🍽</div><div class="mm-detail">Braddah Hutts: BBQ pork & chicken, $15–$20, cash only, closed weekends. Hana Ranch: burgers & salads $20–$45, open-air, mai tais.</div></div></div>
+              <div class="mm-stop optional"><span class="mm-badge">MM 42</span><div class="mm-content"><div class="mm-name">Seven Sacred Pools / Ohe'o Gulch</div><div class="mm-detail">⚠ Verify NPS access at nps.gov/hale — sometimes closed for flash floods. Leave Hana by 3:00–3:30 PM if doing this to make dinner.</div></div></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner (tentative)</div>
+
+      </div><!-- end mile-by-mile -->
+
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner (tentative)</div>
         <div class="item"><div class="item-icon dining">🐟</div><div class="item-content"><div class="item-name">Mama's Fish House (may cancel if day runs long)</div><div class="item-time">6:00 PM · Leave Hana by 3:00 PM</div><div class="item-status status-booked">✓ Reserved — Vincent Iacovelli</div></div></div>
       </div>
+
     </div>
   </div>
 
+  <!-- AUG 1 -->
   <div class="day-card scroll-anchor" id="aug1">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--palm)"><span class="month">Aug</span><span class="num">1</span></div><div class="day-meta"><div class="day-dow">Saturday</div><div class="day-title">Ka'anapali + Sunset Sail 🌅</div><div class="day-pills"><span class="pill pill-palm">Trilogy Sail Booked</span><span class="pill pill-coral">Leilani's Booked</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--palm)"><span class="month">Aug</span><span class="num">1</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Saturday</div>
+        <div class="day-title">Ka'anapali + Sunset Sail 🌅</div>
+        <div class="day-pills"><span class="pill pill-palm">Trilogy Sail Booked</span><span class="pill pill-coral">Leilani's Booked</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🌊 Afternoon</div>
-        <div class="item"><div class="item-icon activity">🤿</div><div class="item-content"><div class="item-name">Black Rock Beach (Puʻu Kekaʻa) Snorkeling</div><div class="item-detail">Ka'anapali Beach Walk → Black Rock → Whalers Village. Bring Snorkel Bob's gear! Sea turtles common.</div></div></div>
+      <div class="segment">
+        <div class="segment-label">🍽 Lunch</div>
+        <div class="item"><div class="item-icon dining">🐟</div><div class="item-content"><div class="item-name">South Maui Fish Company</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🚢 Evening</div>
-        <div class="item"><div class="item-icon activity">⛵</div><div class="item-content"><div class="item-name">Trilogy Deluxe Ka'anapali Sunset Sail</div><div class="item-time">Check-in 4:00 PM · Departs 4:30 PM · Returns 7:00 PM</div><div class="item-detail">Barefoot cruise · Open bar · Chef appetizers · Beach boarding</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="http://sailtrilogy.com" target="_blank">↗ sailtrilogy.com</a></div></div>
+      <div class="segment">
+        <div class="segment-label">🌊 Afternoon</div>
+        <div class="item"><div class="item-icon activity">🤿</div><div class="item-content"><div class="item-name">Black Rock Beach (Puʻu Kekaʻa) Snorkeling</div><div class="item-detail">Ka'anapali Beach Walk → Black Rock → Whalers Village Shopping. Bring Snorkel Bob's gear! Sea turtles common.</div><a class="booking-link" href="https://snorkelbob.com" target="_blank">↗ Snorkel Bob's Wailea</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
-        <div class="item"><div class="item-icon dining">🌊</div><div class="item-content"><div class="item-name">Leilani's on the Beach</div><div class="item-time">7:45 PM · Steps from Trilogy's boarding spot</div><div class="item-detail">No driving needed! Oceanfront, casual · Elisabeth: vegetarian options ✅</div><div class="item-status status-booked">✓ Booked</div></div></div>
+      <div class="segment">
+        <div class="segment-label">🚢 Evening</div>
+        <div class="item"><div class="item-icon activity">⛵</div><div class="item-content"><div class="item-name">Trilogy Deluxe Ka'anapali Sunset Sail</div><div class="item-time">Check-in 4:00 PM · Departs 4:30 PM · Returns 7:00 PM</div><div class="item-detail">Barefoot cruise · Open bar · Chef appetizers · Beach boarding (get a little wet!)</div><div class="item-status status-booked">✓ Booked</div><a class="booking-link" href="http://sailtrilogy.com" target="_blank">↗ sailtrilogy.com</a></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
+        <div class="item"><div class="item-icon dining">🌊</div><div class="item-content"><div class="item-name">Leilani's on the Beach</div><div class="item-time">7:45 PM · Steps from Trilogy's boarding spot</div><div class="item-detail">No driving needed! Oceanfront, casual · Elisabeth: vegetarian options available ✅</div><div class="item-status status-booked">✓ Booked</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- AUG 2 -->
   <div class="day-card scroll-anchor" id="aug2">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--gold)"><span class="month">Aug</span><span class="num">2</span></div><div class="day-meta"><div class="day-dow">Sunday</div><div class="day-title">Four Seasons Check-In 🌟</div><div class="day-pills"><span class="pill pill-gold">Four Seasons</span><span class="pill pill-coral">Ferraro's Dinner</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--gold)"><span class="month">Aug</span><span class="num">2</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Sunday</div>
+        <div class="day-title">Four Seasons Check-In 🌟</div>
+        <div class="day-pills"><span class="pill pill-gold">Four Seasons</span><span class="pill pill-coral">Ferraro's Dinner</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🏨 Resort Transfer</div>
+      <div class="segment">
+        <div class="segment-label">🏨 Resort Transfer</div>
         <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">Check out: Wailea Beach Resort Marriott</div><div class="item-time">12:00 PM</div></div></div>
         <div class="item"><div class="item-icon hotel">⭐</div><div class="item-content"><div class="item-name">Check in: Four Seasons Resort Maui at Wailea</div><div class="item-detail">3900 Wailea Alanui Dr · Conf: 4366700393</div><a class="booking-link" href="https://www.fourseasons.com/maui" target="_blank">↗ fourseasons.com/maui</a></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
-        <div class="item"><div class="item-icon dining">🇮🇹</div><div class="item-content"><div class="item-name">Ferraro's Bar e Ristorante</div><div class="item-time">7:00 PM · On the Four Seasons property</div><div class="item-detail">Oceanfront coastal Italian · Sunset ~7:10 PM — perfect timing!</div><div class="item-status status-booked">✓ Booked</div></div></div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
+        <div class="item"><div class="item-icon dining">🇮🇹</div><div class="item-content"><div class="item-name">Ferraro's Bar e Ristorante</div><div class="item-time">7:00 PM · On the Four Seasons property</div><div class="item-detail">Oceanfront coastal Italian · Sunset ~7:10 PM — perfect timing! · Only open-air oceanfront restaurant in Wailea</div><div class="item-status status-booked">✓ Booked</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- AUG 3 -->
   <div class="day-card scroll-anchor" id="aug3">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--gold)"><span class="month">Aug</span><span class="num">3</span></div><div class="day-meta"><div class="day-dow">Monday</div><div class="day-title">Four Seasons Day ☀️</div><div class="day-pills"><span class="pill pill-gold">Beach Yoga</span><span class="pill pill-coral">Mala Ocean Tavern</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--gold)"><span class="month">Aug</span><span class="num">3</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Monday</div>
+        <div class="day-title">Four Seasons Day ☀️</div>
+        <div class="day-pills"><span class="pill pill-gold">Beach Yoga</span><span class="pill pill-coral">Mala Ocean Tavern</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">🌅 Morning</div>
+      <div class="segment">
+        <div class="segment-label">🌅 Morning</div>
         <div class="item"><div class="item-icon activity">🧘</div><div class="item-content"><div class="item-name">Beach Yoga — Elisabeth & partner</div><div class="item-detail">Complimentary · Confirm time at check-in Aug 2</div></div></div>
         <div class="item"><div class="item-icon activity">🚣</div><div class="item-content"><div class="item-name">Outrigger Canoe — other adult & kid</div><div class="item-detail">Complimentary · ~45 min guided from beach · Coordinate with concierge on Aug 2</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🏊 Afternoon</div>
+      <div class="segment">
+        <div class="segment-label">🏊 Afternoon</div>
         <div class="item"><div class="item-icon activity">🍹</div><div class="item-content"><div class="item-name">Serenity Pool (adults) + Keiki Pool (kids)</div><div class="item-detail">Adults-only infinity pool swim-up bar · Claim spot early, gets busy!</div></div></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
         <div class="item"><div class="item-icon dining">🌊</div><div class="item-content"><div class="item-name">Mala Ocean Tavern</div><div class="item-time">6:45 PM · Lahaina (~25–30 min drive)</div><div class="item-detail">Leave Four Seasons by 6:10 PM · Sunset ~7:10 PM</div><div class="item-status status-booked">✓ Booked</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- AUG 4 — SPAGO UPDATED -->
   <div class="day-card scroll-anchor" id="aug4">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--gold)"><span class="month">Aug</span><span class="num">4</span></div><div class="day-meta"><div class="day-dow">Tuesday</div><div class="day-title">Last Full Day — Maui 🌺</div><div class="day-pills"><span class="pill pill-gold">Day Open</span><span class="pill pill-palm">Spago ✓ Booked</span></div></div><span class="chevron">›</span></div>
-    <div class="day-body">
-      <div class="segment"><div class="segment-label">🌊 Day</div>
-        <div class="item"><div class="item-icon activity">🌺</div><div class="item-content"><div class="item-name">Light day — flight tomorrow afternoon</div><div class="item-detail">Last chance for the beach, pool, or a spa treatment at the Four Seasons.</div></div></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: var(--gold)"><span class="month">Aug</span><span class="num">4</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Tuesday</div>
+        <div class="day-title">Last Full Day — Maui 🌺</div>
+        <div class="day-pills"><span class="pill pill-gold">Day Open</span><span class="pill pill-palm">Spago ✓ Booked</span></div>
       </div>
-      <div class="segment"><div class="segment-label">🍽 Dinner</div>
+      <span class="chevron">›</span>
+    </div>
+    <div class="day-body">
+      <div class="segment">
+        <div class="segment-label">🌊 Day</div>
+        <div class="item"><div class="item-icon activity">🌺</div><div class="item-content">
+          <div class="item-name">Light day — flight tomorrow afternoon</div>
+          <div class="item-detail">Avoid anything too tiring. Last chance for the beach, pool, or a spa treatment at the Four Seasons.</div>
+        </div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">🍽 Dinner</div>
         <div class="item"><div class="item-icon dining">⭐</div><div class="item-content">
           <div class="item-name">Spago — Wolfgang Puck</div>
           <div class="item-time">7:30 PM · Party of 4 · Four Seasons Resort Maui</div>
-          <div class="item-detail">Hawaiian-Californian fusion · Forbes Four Star · Panoramic ocean views · 3900 Wailea Alanui Dr · (808) 879-2999</div>
+          <div class="item-detail">Hawaiian-Californian fusion · Forbes Four Star · Panoramic ocean views · Right on the Four Seasons property · 3900 Wailea Alanui Dr · (808) 879-2999</div>
           <div class="item-status status-booked">✓ Booked — Confirmed</div>
           <a class="booking-link" href="https://www.opentable.com" target="_blank">↗ Manage on OpenTable</a>
         </div></div>
@@ -385,24 +684,41 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
     </div>
   </div>
 
+  <!-- AUG 5 -->
   <div class="day-card scroll-anchor" id="aug5">
-    <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:#888"><span class="month">Aug</span><span class="num">5</span></div><div class="day-meta"><div class="day-dow">Wednesday</div><div class="day-title">Departure Day ✈️</div><div class="day-pills"><span class="pill pill-ocean">OGG → DFW → PHL</span></div></div><span class="chevron">›</span></div>
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-date" style="background: #888"><span class="month">Aug</span><span class="num">5</span></div>
+      <div class="day-meta">
+        <div class="day-dow">Wednesday</div>
+        <div class="day-title">Departure Day ✈️</div>
+        <div class="day-pills"><span class="pill pill-ocean">OGG → DFW → PHL</span></div>
+      </div>
+      <span class="chevron">›</span>
+    </div>
     <div class="day-body">
-      <div class="segment"><div class="segment-label">✈️ Flights Home</div>
+      <div class="segment">
+        <div class="segment-label">🏨 Check-Out</div>
+        <div class="item"><div class="item-icon hotel">🏨</div><div class="item-content"><div class="item-name">Four Seasons Resort Maui at Wailea</div></div></div>
+      </div>
+      <div class="segment">
+        <div class="segment-label">✈️ Flights Home</div>
         <div class="item"><div class="item-icon transport">✈️</div><div class="item-content"><div class="item-name">AA116 · OGG → DFW</div><div class="item-time">5:55 PM HST → 6:00 AM CDT (Aug 6)</div></div></div>
         <div class="item"><div class="item-icon transport">✈️</div><div class="item-content"><div class="item-name">AA415 · DFW → PHL</div><div class="item-time">7:29 AM CDT → 11:52 AM EDT (Aug 6)</div></div></div>
       </div>
     </div>
   </div>
 
+  <!-- QUICK REF -->
   <div class="ref-card" id="quickref">
     <h3>⚡ Quick Reference</h3>
+
     <div class="ref-section">
       <div class="ref-section-title">🏨 Accommodations</div>
       <div class="ref-row"><div class="ref-row-icon">🏨</div><div class="ref-row-content"><div class="ref-row-name">OUTRIGGER Reef Waikiki</div><div class="ref-row-detail">Jul 23–28 · Conf: CI5JRDUQ · 808-923-3111<br><a class="ref-link" href="https://www.outrigger.com" target="_blank">outrigger.com</a></div></div><span class="ref-row-status ref-status-ok">✓ Set</span></div>
       <div class="ref-row"><div class="ref-row-icon">🏨</div><div class="ref-row-content"><div class="ref-row-name">Wailea Beach Resort Marriott</div><div class="ref-row-detail">Jul 28–Aug 2 · Conf: 74953986<br><a class="ref-link" href="https://www.marriott.com" target="_blank">marriott.com</a></div></div><span class="ref-row-status ref-status-ok">✓ Set</span></div>
       <div class="ref-row"><div class="ref-row-icon">⭐</div><div class="ref-row-content"><div class="ref-row-name">Four Seasons Maui at Wailea</div><div class="ref-row-detail">Aug 2–5 · Conf: 4366700393 · 808-874-8000<br><a class="ref-link" href="https://www.fourseasons.com/maui" target="_blank">fourseasons.com/maui</a></div></div><span class="ref-row-status ref-status-ok">✓ Set</span></div>
     </div>
+
     <div class="ref-section">
       <div class="ref-section-title">🍽 Dining Reservations</div>
       <div class="ref-row"><div class="ref-row-icon">🍽</div><div class="ref-row-content"><div class="ref-row-name">Duke's Waikiki</div><div class="ref-row-detail">Fri Jul 24 · 1:30 PM</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
@@ -410,36 +726,75 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
       <div class="ref-row"><div class="ref-row-icon">🎂</div><div class="ref-row-content"><div class="ref-row-name">Hula Grill Waikiki — Birthday Dinner</div><div class="ref-row-detail">Sat Jul 25 · 8:30 PM (whole family)</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
       <div class="ref-row"><div class="ref-row-icon">🌊</div><div class="ref-row-content"><div class="ref-row-name">Humuhumunukunukāpuaʻa</div><div class="ref-row-detail">Tue Jul 28 · 8:00 PM</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
       <div class="ref-row"><div class="ref-row-icon">🍕</div><div class="ref-row-content"><div class="ref-row-name">Monkeypod Kitchen</div><div class="ref-row-detail">Mon Jul 27 · 7:00 PM</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
-      <div class="ref-row"><div class="ref-row-icon">🐟</div><div class="ref-row-content"><div class="ref-row-name">Mama's Fish House (×2)</div><div class="ref-row-detail">Wed Jul 29 @ 5:30 PM · Fri Jul 31 @ 6 PM (tentative)</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
+      <div class="ref-row"><div class="ref-row-icon">🐟</div><div class="ref-row-content"><div class="ref-row-name">Mama's Fish House (×2)</div><div class="ref-row-detail">Wed Jul 29 @ 5:30 PM · Fri Jul 31 @ 6 PM (tentative) · Vincent Iacovelli</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
       <div class="ref-row"><div class="ref-row-icon">🇮🇹</div><div class="ref-row-content"><div class="ref-row-name">Ferraro's — Four Seasons</div><div class="ref-row-detail">Sun Aug 2 · 7:00 PM</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
       <div class="ref-row"><div class="ref-row-icon">🌊</div><div class="ref-row-content"><div class="ref-row-name">Mala Ocean Tavern</div><div class="ref-row-detail">Mon Aug 3 · 6:45 PM</div></div><span class="ref-row-status ref-status-ok">✓</span></div>
       <div class="ref-row"><div class="ref-row-icon">⭐</div><div class="ref-row-content"><div class="ref-row-name">Spago — Wolfgang Puck</div><div class="ref-row-detail">Tue Aug 4 · 7:30 PM · Party of 4 · Four Seasons<br><a class="ref-link" href="https://www.opentable.com" target="_blank">opentable.com</a></div></div><span class="ref-row-status ref-status-ok">✓</span></div>
     </div>
+
     <div class="ref-section">
       <div class="ref-section-title">🎟 Activity Bookings</div>
-      <div class="ref-row"><div class="ref-row-icon">🏛</div><div class="ref-row-content"><div class="ref-row-name">Pearl Harbor / USS Arizona</div><div class="ref-row-detail">⚠ Book May 31 @ 3 PM HST · 56-day window<br><a class="ref-link" href="https://www.recreation.gov" target="_blank">recreation.gov</a></div></div><span class="ref-row-status ref-status-warn">⚠ May 31</span></div>
+      <div class="ref-row"><div class="ref-row-icon">🏛</div><div class="ref-row-content"><div class="ref-row-name">Pearl Harbor / USS Arizona</div><div class="ref-row-detail">⚠ Book May 31 @ 3 PM HST · 56-day window · Free + $1 fee<br><a class="ref-link" href="https://www.recreation.gov" target="_blank">recreation.gov</a></div></div><span class="ref-row-status ref-status-warn">⚠ May 31</span></div>
       <div class="ref-row"><div class="ref-row-icon">🌊</div><div class="ref-row-content"><div class="ref-row-name">Hanauma Bay</div><div class="ref-row-detail">⚠ Book Jul 23 @ 7 AM HST · $25/person + $3 parking<br><a class="ref-link" href="http://honolulu.gov/dpr" target="_blank">honolulu.gov/dpr</a></div></div><span class="ref-row-status ref-status-warn">⚠ Jul 23</span></div>
       <div class="ref-row"><div class="ref-row-icon">🎭</div><div class="ref-row-content"><div class="ref-row-name">Old Lahaina Lu'au</div><div class="ref-row-detail">Thu Jul 30 · 6:15 PM · Conf #8917765<br><a class="ref-link" href="https://www.oldlahainaluau.com" target="_blank">oldlahainaluau.com</a></div></div><span class="ref-row-status ref-status-ok">✓</span></div>
       <div class="ref-row"><div class="ref-row-icon">🏖</div><div class="ref-row-content"><div class="ref-row-name">Wai'anapanapa State Park</div><div class="ref-row-detail">⚠ Book Jul 1 · morning slot · $10/vehicle + $5/person<br><a class="ref-link" href="https://gostateparks.hawaii.gov" target="_blank">gostateparks.hawaii.gov</a></div></div><span class="ref-row-status ref-status-warn">⚠ Jul 1</span></div>
       <div class="ref-row"><div class="ref-row-icon">🤿</div><div class="ref-row-content"><div class="ref-row-name">Molokini Snorkel — Alii Nui</div><div class="ref-row-detail">Wed Jul 29 · $249/person · Departs Maalaea 7 AM<br><a class="ref-link" href="https://www.sailmaui.com" target="_blank">sailmaui.com</a></div></div><span class="ref-row-status ref-status-warn">⚠ Book now</span></div>
       <div class="ref-row"><div class="ref-row-icon">⛵</div><div class="ref-row-content"><div class="ref-row-name">Trilogy Sunset Sail</div><div class="ref-row-detail">Sat Aug 1 · 4:30 PM<br><a class="ref-link" href="http://sailtrilogy.com" target="_blank">sailtrilogy.com</a></div></div><span class="ref-row-status ref-status-ok">✓</span></div>
     </div>
+
     <div class="ref-section">
       <div class="ref-section-title">🤿 Snorkel Gear</div>
-      <div class="ref-row"><div class="ref-row-icon">🐠</div><div class="ref-row-content"><div class="ref-row-name">Snorkel Bob's Wailea</div><div class="ref-row-detail">100 Wailea Ike Dr, Suite A3 · (808) 874-0011 · 8 AM–5 PM daily<br><a class="ref-link" href="https://snorkelbob.com" target="_blank">snorkelbob.com</a></div></div></div>
+      <div class="ref-row"><div class="ref-row-icon">🐠</div><div class="ref-row-content"><div class="ref-row-name">Snorkel Bob's Wailea</div><div class="ref-row-detail">100 Wailea Ike Dr, Suite A3 · (808) 874-0011 · 8 AM–5 PM daily · Weekly rentals<br><a class="ref-link" href="https://snorkelbob.com" target="_blank">snorkelbob.com</a></div></div></div>
     </div>
+  </div>
+
+</div>
+
+<div style="max-width:800px;margin:0 auto;padding:0 16px 32px">
+  <div style="background:var(--white);border-radius:16px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+    <div style="font-family:'DM Mono',monospace;font-size:.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--ocean);margin-bottom:12px">🎵 Trip Soundtrack</div>
+    <iframe src="https://open.spotify.com/embed/playlist/2U5siS6NpPOa1Y6SK87iM2?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px"></iframe>
   </div>
 </div>
 
-<div class="footer">🌺 Hawaii 2026 · July 23 – August 5 · Family of Four<br>Made with aloha · Pull up on any device</div>
+<div class="footer">
+  🌺 Hawaii 2026 · July 23 – August 5 · Family of Four<br>
+  Made with aloha · Pull up on any device
+</div>
 
 <script>
-function toggleHana(header){const section=header.closest('.hana-section');section.classList.toggle('open')}
-function toggleDay(header){const card=header.closest('.day-card');card.classList.toggle('open')}
-function jumpToDay(id){const el=document.getElementById(id);if(!el)return;if(el.classList.contains('day-card'))el.classList.add('open');setTimeout(()=>{const top=el.getBoundingClientRect().top+window.scrollY-58;window.scrollTo({top,behavior:'smooth'})},50);document.querySelectorAll('.quick-link').forEach(l=>l.classList.remove('active'));const active=document.querySelector(`.quick-link[onclick="jumpToDay('${id}')"]`);if(active)active.classList.add('active')}
-const allNavLinks=document.querySelectorAll('.quick-link');
-const dayCards=document.querySelectorAll('.day-card[id],[id].island-label,[id].ref-card');
-window.addEventListener('scroll',()=>{let current=null;dayCards.forEach(el=>{if(el.getBoundingClientRect().top<=80)current=el.id});allNavLinks.forEach(l=>{const match=l.getAttribute('onclick')?.match(/'([^']+)'/);l.classList.toggle('active',match&&match[1]===current)})},{passive:true});
+function toggleHana(header) {
+  const section = header.closest('.hana-section');
+  section.classList.toggle('open');
+}
+function toggleDay(header) {
+  const card = header.closest('.day-card');
+  card.classList.toggle('open');
+}
+function jumpToDay(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (el.classList.contains('day-card')) el.classList.add('open');
+  setTimeout(() => {
+    const top = el.getBoundingClientRect().top + window.scrollY - 58;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }, 50);
+  document.querySelectorAll('.quick-link').forEach(l => l.classList.remove('active'));
+  const active = document.querySelector(`.quick-link[onclick="jumpToDay('${id}')"]`);
+  if (active) active.classList.add('active');
+}
+const allNavLinks = document.querySelectorAll('.quick-link');
+const dayCards = document.querySelectorAll('.day-card[id], [id].island-label, [id].ref-card');
+window.addEventListener('scroll', () => {
+  let current = null;
+  dayCards.forEach(el => {
+    if (el.getBoundingClientRect().top <= 80) current = el.id;
+  });
+  allNavLinks.forEach(l => {
+    const match = l.getAttribute('onclick')?.match(/'([^']+)'/);
+    l.classList.toggle('active', match && match[1] === current);
+  });
+}, { passive: true });
 </script>
 </body>
 </html>
