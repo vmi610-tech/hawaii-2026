@@ -27,7 +27,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .quick-links::-webkit-scrollbar{display:none}
 .quick-link{padding:12px 14px;font-size:.7rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;opacity:.7;color:white;text-decoration:none;display:flex;align-items:center;gap:5px;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
 .quick-link:hover,.quick-link.active{opacity:1;border-bottom-color:var(--gold-light)}
-.container{max-width:800px;margin:0 auto;padding:32px 16px 80px}
+.container{max-width:800px;margin:0 auto;padding:32px 16px 100px}
 .island-label{font-family:'DM Mono',monospace;font-size:.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--ocean);margin:40px 0 12px;display:flex;align-items:center;gap:10px}
 .island-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--ocean-light),transparent);opacity:.3}
 .day-card{background:var(--white);border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);transition:box-shadow .2s}
@@ -109,7 +109,39 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
 .footer{text-align:center;padding:24px 16px;color:var(--ink-muted);font-size:.72rem;border-top:1px solid var(--sand-dark);margin-top:40px}
 .bday-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--coral),var(--coral-light));color:white;font-size:.65rem;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.5px}
 .scroll-anchor{scroll-margin-top:50px}
-@media(max-width:480px){.hero{padding:48px 16px 72px}.container{padding:24px 12px 60px}.day-header{padding:14px 16px}.day-body{padding:0 16px 16px}}
+@media(max-width:480px){.hero{padding:48px 16px 72px}.container{padding:24px 12px 80px}.day-header{padding:14px 16px}.day-body{padding:0 16px 16px}}
+/* ── MAP ── */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--ocean);border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.2)}
+.bb-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:100px;padding:9px 28px;color:white;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;letter-spacing:.3px;transition:all .2s}
+.bb-btn.active{background:var(--gold);border-color:var(--gold-light)}
+.map-outer{display:none;padding:16px 16px 100px;max-width:800px;margin:0 auto}
+.map-outer.active{display:block}
+.map-island-toggle{display:flex;gap:8px;margin-bottom:14px}
+.mit-btn{flex:1;padding:10px 0;border-radius:12px;border:2px solid var(--sand-dark);background:var(--white);color:var(--ink-soft);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s}
+.mit-btn.active{background:var(--ocean);color:white;border-color:var(--ocean)}
+.map-mode-toggle{display:flex;gap:8px;margin-bottom:14px}
+.mmt-btn{padding:7px 14px;border-radius:100px;border:1.5px solid var(--sand-dark);background:var(--white);color:var(--ink-soft);font-family:inherit;font-size:.72rem;font-weight:500;cursor:pointer;transition:all .18s}
+.mmt-btn.active{background:var(--palm);color:white;border-color:var(--palm)}
+#map-container{width:100%;border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.1)}
+#map-iframe{width:100%;height:380px;border:none;display:block}
+.map-tooltip{position:absolute;background:white;border-radius:10px;padding:9px 12px;box-shadow:0 4px 20px rgba(0,0,0,.15);font-family:inherit;max-width:200px;pointer-events:none;z-index:10;display:none}
+.mtt-title{font-weight:600;font-size:.82rem;color:var(--ink);margin-bottom:2px}
+.mtt-detail{font-size:.72rem;color:var(--ink-soft);line-height:1.4}
+.map-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:.68rem;color:var(--ink-soft);font-weight:500}
+.legend-dot{width:9px;height:9px;border-radius:50%}
+.map-hana-note{background:linear-gradient(135deg,#e0f0e8,#edf7f2);border-left:3px solid var(--palm);border-radius:10px;padding:10px 14px;font-size:.75rem;color:var(--ink-soft);line-height:1.5;margin-bottom:12px}
+.map-hana-note strong{color:var(--palm);display:block;margin-bottom:3px}
+.hana-stop-list{display:flex;flex-direction:column;gap:6px}
+.hsl-item{display:flex;gap:10px;background:var(--white);border-radius:10px;padding:9px 12px;cursor:pointer;border:1.5px solid transparent;transition:all .15s}
+.hsl-item.selected{background:#e0f0e8;border-color:var(--palm)}
+.hsl-mm{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--ocean);font-weight:500;min-width:38px;margin-top:2px;flex-shrink:0}
+.hsl-name{font-weight:600;font-size:.8rem;color:var(--ink)}
+.hsl-note{font-size:.71rem;color:var(--ink-soft);margin-top:2px;line-height:1.4}
+.hsl-tag{display:inline-flex;font-size:.58rem;font-weight:600;padding:1px 6px;border-radius:100px;margin-left:5px;vertical-align:middle}
+.hsl-must{background:#c8eedd;color:var(--palm)}
+.hsl-food{background:#fde8e2;color:var(--coral)}
+.hsl-tip{background:#e0f2f7;color:var(--ocean)}
 </style>
 </head>
 <body>
@@ -183,7 +215,7 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
         <div class="item"><div class="item-icon warn">⚠️</div><div class="item-content"><div class="item-name">Hanauma Bay Snorkeling</div><div class="item-detail">Book Jul 23 @ 7:00 AM HST — slots sell out in minutes! $25/person + $3 parking.</div><div class="item-status status-warn">⚠ Book Jul 23 @ 7 AM HST</div><a class="booking-link" href="http://honolulu.gov/dpr" target="_blank">↗ honolulu.gov/dpr</a></div></div>
       </div>
       <div class="segment"><div class="segment-label">🌊 Quick Stop</div>
-        <div class="item"><div class="item-icon activity">🌊</div><div class="item-content"><div class="item-name">Makapu'u Lookout &amp; Blowhole</div><div class="item-detail">On Kalanianaole Hwy heading back from Hanauma Bay · Sweeping views of Windward Coast &amp; Rabbit Island · Blowhole visible when surf is up · Free, no booking · ~15–20 min</div></div></div>
+        <div class="item"><div class="item-icon activity">🌊</div><div class="item-content"><div class="item-name">Makapu'u Lookout &amp; Blowhole</div><div class="item-detail">On Kalanianaole Hwy heading back from Hanauma Bay · Sweeping views of Windward Coast &amp; Rabbit Island · Free, no booking · ~15–20 min</div></div></div>
       </div>
       <div class="segment"><div class="segment-label">🌅 Adults Only Happy Hour</div>
         <div class="item"><div class="item-icon dining">🥂</div><div class="item-content"><div class="item-name">House Without a Key — Halekulani Hotel</div><div class="item-time">5:30 PM · just the two of you</div><div class="item-detail">Hula show 6–8 PM · Sunset ~7:15 PM</div><div class="item-status status-booked">✓ Booked via OpenTable</div><a class="booking-link" href="https://www.opentable.com/r/house-without-a-key-halekulani-honolulu" target="_blank">↗ Manage on OpenTable</a></div></div>
@@ -444,17 +476,156 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
       <div class="ref-row"><div class="ref-row-icon">🐠</div><div class="ref-row-content"><div class="ref-row-name">Snorkel Bob's Wailea</div><div class="ref-row-detail">100 Wailea Ike Dr, Suite A3 · (808) 874-0011 · 8 AM–5 PM daily<br><a class="ref-link" href="https://snorkelbob.com" target="_blank">snorkelbob.com</a></div></div></div>
     </div>
   </div>
+
+  <div class="footer">🌺 Hawaii 2026 · July 23 – August 5 · Family of Four<br>Made with aloha · Pull up on any device</div>
 </div>
 
-<div class="footer">🌺 Hawaii 2026 · July 23 – August 5 · Family of Four<br>Made with aloha · Pull up on any device</div>
+<!-- Fixed bottom map button -->
+<div class="bottom-bar">
+  <button class="bb-btn" id="bb-btn" onclick="toggleMap()">🗺 Maps</button>
+</div>
+
+<!-- Map tab (hidden until button tapped) -->
+<div class="map-outer" id="map-tab">
+  <div class="map-island-toggle">
+    <button class="mit-btn active" id="mit-oahu" onclick="switchIsland('oahu')">🌴 O'ahu</button>
+    <button class="mit-btn" id="mit-maui" onclick="switchIsland('maui')">🌊 Maui</button>
+  </div>
+  <div class="map-mode-toggle" id="maui-modes" style="display:none">
+    <button class="mmt-btn active" id="mmt-all" onclick="switchMauiMode('all')">📍 All Maui</button>
+    <button class="mmt-btn" id="mmt-hana" onclick="switchMauiMode('hana')">🌿 Road to Hana</button>
+  </div>
+  <div id="map-container">
+    <iframe id="map-iframe" src="" allowfullscreen loading="lazy"></iframe>
+  </div>
+  <div class="map-legend" id="map-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#1a6b7a"></div>Hotel</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e05c3a"></div>Dining</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2d6a4f"></div>Activity</div>
+  </div>
+  <div id="hana-panel" style="display:none">
+    <div class="map-hana-note"><strong>🌿 Road to Hana — July 31</strong>Leave 6:30 AM · Clockwise Pa'ia to Hana · Tap any stop to highlight</div>
+    <div class="hana-stop-list" id="hsl-items"></div>
+  </div>
+</div>
 
 <script>
-function toggleHana(header){const section=header.closest('.hana-section');section.classList.toggle('open')}
-function toggleDay(header){const card=header.closest('.day-card');card.classList.toggle('open')}
-function jumpToDay(id){const el=document.getElementById(id);if(!el)return;if(el.classList.contains('day-card'))el.classList.add('open');setTimeout(()=>{const top=el.getBoundingClientRect().top+window.scrollY-58;window.scrollTo({top,behavior:'smooth'})},50);document.querySelectorAll('.quick-link').forEach(l=>l.classList.remove('active'));const active=document.querySelector(`.quick-link[onclick="jumpToDay('${id}')"]`);if(active)active.classList.add('active')}
-const allNavLinks=document.querySelectorAll('.quick-link');
+function toggleHana(h){h.closest('.hana-section').classList.toggle('open')}
+function toggleDay(h){h.closest('.day-card').classList.toggle('open')}
+let mapOpen=false;
+function jumpToDay(id){
+  if(mapOpen)closeMap();
+  const el=document.getElementById(id);if(!el)return;
+  if(el.classList.contains('day-card'))el.classList.add('open');
+  setTimeout(()=>window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-58,behavior:'smooth'}),50);
+  document.querySelectorAll('.quick-link').forEach(l=>l.classList.remove('active'));
+  document.querySelector(`.quick-link[onclick="jumpToDay('${id}')"]`)?.classList.add('active');
+}
+function toggleMap(){mapOpen?closeMap():openMap();}
+function openMap(){
+  mapOpen=true;
+  document.querySelector('.container').style.display='none';
+  document.getElementById('map-tab').classList.add('active');
+  document.getElementById('bb-btn').classList.add('active');
+  document.getElementById('bb-btn').textContent='✕ Close Map';
+  document.querySelectorAll('.quick-link').forEach(l=>l.classList.remove('active'));
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderCurrent();
+}
+function closeMap(){
+  mapOpen=false;
+  document.querySelector('.container').style.display='';
+  document.getElementById('map-tab').classList.remove('active');
+  document.getElementById('bb-btn').classList.remove('active');
+  document.getElementById('bb-btn').textContent='🗺 Maps';
+}
+const allLinks=document.querySelectorAll('.quick-link');
 const dayCards=document.querySelectorAll('.day-card[id],[id].island-label,[id].ref-card');
-window.addEventListener('scroll',()=>{let current=null;dayCards.forEach(el=>{if(el.getBoundingClientRect().top<=80)current=el.id});allNavLinks.forEach(l=>{const match=l.getAttribute('onclick')?.match(/'([^']+)'/);l.classList.toggle('active',match&&match[1]===current)})},{passive:true});
+window.addEventListener('scroll',()=>{
+  if(mapOpen)return;
+  let cur=null;
+  dayCards.forEach(el=>{if(el.getBoundingClientRect().top<=80)cur=el.id});
+  allLinks.forEach(l=>{const m=l.getAttribute('onclick')?.match(/'([^']+)'/);l.classList.toggle('active',!!(m&&m[1]===cur));});
+},{passive:true});
+
+// MAP URLS
+const OAHU_URL = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d119352!2d-157.8583!3d21.3069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus";
+const MAUI_URL = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d152400!2d-156.3319!3d20.7984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000001!5m2!1sen!2sus";
+const HANA_URL = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d60000!2d-156.1!3d20.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000002!5m2!1sen!2sus";
+
+let curIsland='oahu', curMode='all';
+
+const HANA_STOPS = [
+  {mm:"Pa'ia", name:"Pa'ia Town", note:'Coffee + Paia Fish Market. Reset odometer at MM 0.', tag:'must'},
+  {mm:'MM 2', name:'Twin Falls', note:'Easy hike, great first waterfall for kids.', tag:'must'},
+  {mm:'MM 3', name:'Rainbow Eucalyptus Trees', note:'Left side of road. Stunning multicolored bark.', tag:'tip'},
+  {mm:'MM 10', name:'Garden of Eden Arboretum', note:'$20/car. Overlooks, food truck, restrooms.', tag:'tip'},
+  {mm:'MM 12', name:'Kaumahina Wayside', note:'Free. Restrooms. Dramatic Keanae Peninsula view.', tag:'tip'},
+  {mm:'MM 13', name:'Punalau Falls', note:'Hidden gem. Tiny turnout, often empty.', tag:'tip'},
+  {mm:'MM 16', name:"Aunty Sandy's Banana Bread", note:'Cash only. Best on the road. DO NOT SKIP.', tag:'must'},
+  {mm:'MM 17', name:"Ching's Pond", note:'Marvelous pool. Very limited parking.', tag:'tip'},
+  {mm:'MM 19-20', name:'Three Bears Falls', note:'Three-tiered, spectacular. Visible from bridge.', tag:'must'},
+  {mm:'MM 22', name:"Pua'a Ka'a Wayside", note:'Two falls + spring-fed pool (cold!). Restrooms.', tag:'tip'},
+  {mm:'MM 25', name:'Makapipi Falls Bridge', note:'Walk to bridge center, ocean side. Look straight down!', tag:'tip'},
+  {mm:'MM 29', name:'Nahiku Marketplace', note:'Island Chef, Nahiku Cafe. Last snack stop.', tag:'food'},
+  {mm:'MM 32', name:"Wai'anapanapa Black Sand Beach", note:'RESERVED. $10/vehicle + $5/pp. Sea arch + coastal trail.', tag:'must'},
+  {mm:'MM 34', name:'Hana + Red Sand Beach', note:'Park Uakea Rd. Wear real shoes on red cinders!', tag:'must'},
+  {mm:'MM 42', name:"Ohe'o Gulch", note:'Seven Sacred Pools. Verify NPS access. Leave by 3 PM.', tag:'tip'},
+];
+
+function renderCurrent(){
+  if(curIsland==='oahu') renderOahu();
+  else if(curMode==='all') renderMauiAll();
+  else renderHana();
+}
+
+function renderOahu(){
+  document.getElementById('maui-modes').style.display='none';
+  document.getElementById('hana-panel').style.display='none';
+  document.getElementById('map-container').style.display='block';
+  document.getElementById('map-iframe').src=OAHU_URL;
+}
+
+function renderMauiAll(){
+  document.getElementById('hana-panel').style.display='none';
+  document.getElementById('map-container').style.display='block';
+  document.getElementById('map-iframe').src=MAUI_URL;
+}
+
+function renderHana(){
+  document.getElementById('map-container').style.display='none';
+  document.getElementById('hana-panel').style.display='block';
+  buildHanaList();
+}
+
+function buildHanaList(){
+  const list=document.getElementById('hsl-items');
+  if(list.children.length>0)return;
+  HANA_STOPS.forEach((s,i)=>{
+    const tc=s.tag==='must'?'hsl-must':s.tag==='food'?'hsl-food':'hsl-tip';
+    const tl=s.tag==='must'?'⭐ Must':s.tag==='food'?'🍽 Food':'💡 Tip';
+    const d=document.createElement('div');
+    d.className='hsl-item';
+    d.innerHTML='<div class="hsl-mm">'+s.mm+'</div><div><div class="hsl-name">'+(i+1)+'. '+s.name+'<span class="hsl-tag '+tc+'">'+tl+'</span></div><div class="hsl-note">'+s.note+'</div></div>';
+    list.appendChild(d);
+  });
+}
+
+function switchIsland(island){
+  curIsland=island;
+  document.getElementById('mit-oahu').classList.toggle('active',island==='oahu');
+  document.getElementById('mit-maui').classList.toggle('active',island==='maui');
+  document.getElementById('maui-modes').style.display=island==='maui'?'flex':'none';
+  if(island==='oahu') renderOahu();
+  else{curMode='all';document.getElementById('mmt-all').classList.add('active');document.getElementById('mmt-hana').classList.remove('active');renderMauiAll();}
+}
+
+function switchMauiMode(mode){
+  curMode=mode;
+  document.getElementById('mmt-all').classList.toggle('active',mode==='all');
+  document.getElementById('mmt-hana').classList.toggle('active',mode==='hana');
+  if(mode==='all') renderMauiAll(); else renderHana();
+}
 </script>
 </body>
 </html>
