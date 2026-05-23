@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-title" content="🌺 Hawaii 2026">
 <title>🌺 Hawaii 2026 — Family Itinerary</title>
 <meta name="color-scheme" content="light only">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{--ocean:#1a6b7a;--ocean-light:#2899b0;--sand:#f5efe6;--sand-dark:#e8ddd0;--coral:#e05c3a;--coral-light:#f07c5a;--palm:#2d6a4f;--palm-light:#52b788;--gold:#c9922a;--gold-light:#f0b84a;--white:#fefcf8;--ink:#1c1c1e;--ink-soft:#3d3d3f;--ink-muted:#888}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,7 +28,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .quick-link{padding:12px 14px;font-size:.7rem;font-weight:500;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;opacity:.7;color:white;text-decoration:none;display:flex;align-items:center;gap:5px;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
 .quick-link:hover,.quick-link.active{opacity:1;border-bottom-color:var(--gold-light)}
 .container{max-width:800px;margin:0 auto;padding:32px 16px 100px}
-.island-label{font-family:'DM Mono',monospace;font-size:.65rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--ocean);margin:8px 0 12px;display:flex;align-items:center;gap:10px}
+.island-label{font-family:'Josefin Sans',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ocean);margin:8px 0 12px;display:flex;align-items:center;gap:10px}
 .island-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--ocean-light),transparent);opacity:.3}
 .day-card{background:var(--white);border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);transition:box-shadow .2s}
 .day-header{display:flex;align-items:center;padding:16px 20px;cursor:pointer;gap:14px;user-select:none;-webkit-tap-highlight-color:transparent}
@@ -106,6 +106,27 @@ a.ref-link{display:inline-block;font-size:.68rem;color:rgba(255,255,255,.7);text
 .footer{text-align:center;padding:24px 16px;color:var(--ink-muted);font-size:.72rem;border-top:1px solid var(--sand-dark);margin-top:40px}
 .bday-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--coral),var(--coral-light));color:white;font-size:.65rem;font-weight:600;padding:3px 9px;border-radius:100px;letter-spacing:.5px}
 .scroll-anchor{scroll-margin-top:50px}
+
+/* ── Countdown ── */
+.countdown-strip{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 24px 0;flex-wrap:wrap}
+.cd-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold-light);line-height:1}
+.cd-unit{font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:.05em;margin-left:2px}
+.cd-label{font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:2px;text-transform:uppercase}
+.cd-sep{color:rgba(255,255,255,.2);font-size:.8rem}
+
+/* ── Island Weather ── */
+.weather-strip{margin:8px 0 12px}
+.wx-card{border-radius:12px;overflow:hidden;position:relative;min-height:72px;display:flex;flex-direction:row;align-items:center;padding:10px 16px;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.wx-canvas{position:absolute;inset:0;width:100%;height:100%}
+.wx-content{position:relative;z-index:2;display:flex;align-items:center;gap:14px;width:100%}
+.wx-island{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.wx-temp{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#fff;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.3);flex-shrink:0}
+.wx-right{display:flex;flex-direction:column;gap:2px}
+.wx-desc{font-size:.72rem;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.3)}
+.wx-meta{display:flex;gap:8px;flex-wrap:wrap}
+.wx-detail{font-size:.62rem;color:rgba(255,255,255,.55)}
+.wx-loading{position:relative;z-index:2;color:rgba(255,255,255,.4);font-size:.72rem}
+.wx-updated{text-align:center;font-size:.6rem;color:var(--ink-muted);margin-top:-6px;margin-bottom:6px;letter-spacing:.04em}
 @media(max-width:480px){.hero{padding:48px 16px 72px}.container{padding:24px 12px 80px}.day-header{padding:14px 16px}.day-body{padding:0 16px 16px}}
 /* ── MAP ── */
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:linear-gradient(135deg,#8b4513,#c9922a);border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.3)}
@@ -172,7 +193,13 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
   <span class="hero-emoji">🌺</span>
   <h1>Hawaii 2026</h1>
   <p class="hero-sub">July 23 – August 5 &nbsp;·&nbsp; Family of Four</p>
-  <div class="hotel-chips">
+  <div class="countdown-strip">
+    <div class="cd-label">Aloha in</div>
+    <div><span class="cd-num" id="cd-days">--</span><span class="cd-unit">days</span></div>
+    <div class="cd-sep">·</div>
+    <div class="cd-label" id="cd-sub">July 23, 2026</div>
+  </div>
+  <div class="hotel-chips" style="margin-top:16px">
     <div class="hotel-chip" onclick="jumpToDay('jul23')"><span>📍</span> Outrigger Reef Waikiki · Jul 23–28</div>
     <div class="hotel-chip" onclick="jumpToDay('jul28')"><span>📍</span> Wailea Marriott · Jul 28–Aug 2</div>
     <div class="hotel-chip" onclick="jumpToDay('aug2')"><span>📍</span> Four Seasons Maui · Aug 2–5</div>
@@ -203,6 +230,9 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
 
 
   <div class="island-label" id="oahu">🌴 O'ahu — Outrigger Reef Waikiki</div>
+  <div class="weather-strip">
+    <div class="wx-card"><canvas class="wx-canvas" id="sky-oahu"></canvas><div class="wx-loading" id="wx-load-oahu">Loading…</div><div class="wx-content" id="wx-oahu" style="display:none"></div></div>
+  </div>
 
   <div class="day-card scroll-anchor" id="jul23">
     <div class="day-header" onclick="toggleDay(this)"><div class="day-date"><span class="month">Jul</span><span class="num">23</span></div><div class="day-meta"><div class="day-dow">Thursday</div><div class="day-title">Arrival Day ✈️</div><div class="day-pills"><span class="pill pill-ocean">Travel</span><span class="pill pill-gold">Check-in</span></div></div><span class="chevron">›</span></div>
@@ -277,6 +307,9 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
   </div>
 
   <div class="island-label" id="maui">🌊 Maui — Wailea → Four Seasons</div>
+  <div class="weather-strip">
+    <div class="wx-card"><canvas class="wx-canvas" id="sky-maui"></canvas><div class="wx-loading" id="wx-load-maui">Loading…</div><div class="wx-content" id="wx-maui" style="display:none"></div></div>
+  </div>
 
   <div class="day-card scroll-anchor" id="jul28">
     <div class="day-header" onclick="toggleDay(this)"><div class="day-date" style="background:var(--palm)"><span class="month">Jul</span><span class="num">28</span></div><div class="day-meta"><div class="day-dow">Tuesday</div><div class="day-title">Island Transfer → Maui ✈️</div><div class="day-pills"><span class="pill pill-palm">HNL → OGG</span><span class="pill pill-coral">Nobu Dinner</span></div></div><span class="chevron">›</span></div>
@@ -571,6 +604,97 @@ window.addEventListener('scroll',function(){
     l.classList.toggle('active',!!(cur&&m.indexOf("'"+cur+"'")>-1));
   });
 },{passive:true});
+</script>
+<script>
+// ── Countdown ──────────────────────────────────────────────
+(function(){
+  function tick(){
+    var target=new Date('2026-07-23T00:00:00-10:00');
+    var diff=target-new Date();
+    if(diff<=0){document.getElementById('cd-days').textContent='🌺';document.getElementById('cd-sub').textContent="It's time!";return;}
+    var days=Math.ceil(diff/(1000*60*60*24));
+    document.getElementById('cd-days').textContent=days;
+    document.getElementById('cd-sub').textContent='until July 23, 2026';
+  }
+  tick();setInterval(tick,60000);
+})();
+
+// ── Sky animation ──────────────────────────────────────────
+function SkyScene(canvasId,condition){
+  var c=document.getElementById(canvasId),ctx=c.getContext('2d');
+  var clouds=[],drops=[],t=0;
+  function resize(){c.width=c.parentElement.offsetWidth;c.height=c.parentElement.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  var nClouds=condition==='sunny'?1:condition==='partly_cloudy'?2:4;
+  for(var i=0;i<nClouds;i++)clouds.push({x:Math.random()*c.width,y:20+Math.random()*c.height*.4,r:24+Math.random()*24,speed:.1+Math.random()*.1,op:condition==='sunny'?.2:.55+Math.random()*.25});
+  if(condition==='rain')for(var i=0;i<40;i++)drops.push({x:Math.random()*c.width,y:Math.random()*c.height,len:8+Math.random()*10,sp:4+Math.random()*3});
+  function draw(){
+    var w=c.width,h=c.height;
+    ctx.clearRect(0,0,w,h);
+    var g=ctx.createLinearGradient(0,0,0,h);
+    if(condition==='sunny'){g.addColorStop(0,'#1a6bb5');g.addColorStop(1,'#7ecef4');}
+    else if(condition==='partly_cloudy'){g.addColorStop(0,'#2275b8');g.addColorStop(1,'#a0cce8');}
+    else if(condition==='cloudy'){g.addColorStop(0,'#556677');g.addColorStop(1,'#8899aa');}
+    else{g.addColorStop(0,'#3a4a5a');g.addColorStop(1,'#5a6a7a');}
+    ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+    if(condition!=='rain'&&condition!=='cloudy'){
+      var op=condition==='partly_cloudy'?.7:1,cx=w*.72,cy=28,r=18;
+      var gl=ctx.createRadialGradient(cx,cy,r*.5,cx,cy,r*2.5);
+      gl.addColorStop(0,'rgba(255,230,100,'+(0.3*op)+')');gl.addColorStop(1,'rgba(255,200,50,0)');
+      ctx.fillStyle=gl;ctx.beginPath();ctx.arc(cx,cy,r*2.5,0,Math.PI*2);ctx.fill();
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(t*.008);ctx.strokeStyle='rgba(255,220,80,'+(0.45*op)+')';ctx.lineWidth=1.5;
+      for(var i=0;i<8;i++){ctx.rotate(Math.PI/4);ctx.beginPath();ctx.moveTo(r+4,0);ctx.lineTo(r+11,0);ctx.stroke();}
+      ctx.restore();
+      ctx.fillStyle='rgba(255,235,100,'+op+')';ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+    }
+    clouds.forEach(function(cl){
+      cl.x+=cl.speed;if(cl.x-cl.r*2>w)cl.x=-cl.r*2;
+      ctx.save();ctx.globalAlpha=cl.op;ctx.fillStyle='#fff';
+      ctx.beginPath();ctx.arc(cl.x,cl.y,cl.r,0,Math.PI*2);ctx.arc(cl.x+cl.r*.9,cl.y+cl.r*.1,cl.r*.75,0,Math.PI*2);ctx.arc(cl.x-cl.r*.6,cl.y+cl.r*.15,cl.r*.6,0,Math.PI*2);ctx.fill();ctx.restore();
+    });
+    if(condition==='rain'){ctx.strokeStyle='rgba(180,210,255,.4)';ctx.lineWidth=1;drops.forEach(function(d){ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-2,d.y+d.len);ctx.stroke();d.y+=d.sp;if(d.y>h){d.y=-d.len;d.x=Math.random()*w;}});}
+    ctx.save();ctx.globalAlpha=.12;ctx.strokeStyle='#fff';ctx.lineWidth=1.5;
+    for(var i=0;i<3;i++){ctx.beginPath();var off=(t*.4+i*25)%w;for(var x=-40;x<w+40;x+=4){var y=h*.75+i*8+Math.sin((x+off)*.045)*3;x===-40?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}
+    ctx.restore();
+    t++;requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ── Weather fetch ──────────────────────────────────────────
+var WX_LOCS=[
+  {id:'oahu',label:"O'ahu",sub:'Waikiki',lat:21.2793,lon:-157.8294},
+  {id:'maui',label:'Maui',sub:'Wailea',lat:20.6803,lon:-156.4417}
+];
+function wmoDesc(code){
+  if(code===0)return{text:'Clear & Sunny',sky:'sunny',icon:'☀️'};
+  if(code<=2)return{text:'Partly Cloudy',sky:'partly_cloudy',icon:'⛅'};
+  if(code<=3)return{text:'Mostly Cloudy',sky:'cloudy',icon:'☁️'};
+  if(code<=55)return{text:'Drizzle',sky:'rain',icon:'🌦️'};
+  if(code<=65)return{text:'Rain',sky:'rain',icon:'🌧️'};
+  return{text:'Showers',sky:'rain',icon:'🌦️'};
+}
+WX_LOCS.forEach(function(loc){
+  fetch('https://api.open-meteo.com/v1/forecast?latitude='+loc.lat+'&longitude='+loc.lon+'&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=Pacific%2FHonolulu')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var cur=data.current,cond=wmoDesc(cur.weather_code);
+      var temp=Math.round(cur.temperature_2m),hum=Math.round(cur.relative_humidity_2m),wind=Math.round(cur.wind_speed_10m);
+      document.getElementById('wx-load-'+loc.id).style.display='none';
+      var el=document.getElementById('wx-'+loc.id);
+      el.style.display='block';
+      el.innerHTML='<div class="wx-temp">'+temp+'°</div>'
+        +'<div class="wx-right"><div class="wx-desc">'+cond.icon+' '+cond.text+'</div>'
+        +'<div class="wx-meta"><span class="wx-detail">'+loc.label+' · '+loc.sub+'</span><span class="wx-detail">💧'+hum+'%</span><span class="wx-detail">💨'+wind+'mph</span></div></div>';
+      SkyScene('sky-'+loc.id,cond.sky);
+    })
+    .catch(function(){
+      document.getElementById('wx-load-'+loc.id).style.display='none';
+      var el=document.getElementById('wx-'+loc.id);el.style.display='block';
+      el.innerHTML='<div class="wx-island">'+loc.label+'</div><div class="wx-desc" style="opacity:.5">Weather unavailable</div>';
+      SkyScene('sky-'+loc.id,'sunny');
+    });
+});
 </script>
 </body>
 </html>
