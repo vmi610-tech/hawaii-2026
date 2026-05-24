@@ -8,6 +8,8 @@
 <meta name="apple-mobile-web-app-title" content="🌺 Hawaii 2026">
 <title>🌺 Hawaii 2026 — Family Itinerary</title>
 <meta name="color-scheme" content="light only">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{--ocean:#1a6b7a;--ocean-light:#2899b0;--sand:#f5efe6;--sand-dark:#e8ddd0;--coral:#e05c3a;--coral-light:#f07c5a;--palm:#2d6a4f;--palm-light:#52b788;--gold:#c9922a;--gold-light:#f0b84a;--white:#fefcf8;--ink:#1c1c1e;--ink-soft:#3d3d3f;--ink-muted:#888}
@@ -196,8 +198,6 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
   <div class="countdown-strip">
     <div class="cd-label">Aloha in</div>
     <div><span class="cd-num" id="cd-days">--</span><span class="cd-unit">days</span></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-label" id="cd-sub">July 23, 2026</div>
   </div>
   <div class="hotel-chips" style="margin-top:16px">
     <div class="hotel-chip" onclick="jumpToDay('jul23')"><span>📍</span> Outrigger Reef Waikiki · Jul 23–28</div>
@@ -611,10 +611,9 @@ window.addEventListener('scroll',function(){
   function tick(){
     var target=new Date('2026-07-23T00:00:00-10:00');
     var diff=target-new Date();
-    if(diff<=0){document.getElementById('cd-days').textContent='🌺';document.getElementById('cd-sub').textContent="It's time!";return;}
+    if(diff<=0){document.getElementById('cd-days').textContent='🌺';return;}
     var days=Math.ceil(diff/(1000*60*60*24));
     document.getElementById('cd-days').textContent=days;
-    document.getElementById('cd-sub').textContent='';
   }
   tick();setInterval(tick,60000);
 })();
