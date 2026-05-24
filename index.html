@@ -192,7 +192,7 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
   <div class="hero-wave"></div>
   <span class="hero-emoji">🌺</span>
   <h1>Hawaii 2026</h1>
-  <p class="hero-sub">July 23 – August 5 &nbsp;·&nbsp; Family of Four</p>
+  <p class="hero-sub">July 23 – August 5 &nbsp;·&nbsp; Iacovelli</p>
   <div class="countdown-strip">
     <div class="cd-label">Aloha in</div>
     <div><span class="cd-num" id="cd-days">--</span><span class="cd-unit">days</span></div>
@@ -532,7 +532,7 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
     </div>
   </div>
 
-  <div class="footer">🌺 Hawaii 2026 · July 23 – August 5 · Family of Four<br>Made with aloha · Pull up on any device</div>
+  <div class="footer">🌺 Hawaii 2026 · July 23 – August 5 · Iacovelli<br>Made with aloha · Pull up on any device</div>
 </div>
 
 <!-- Fixed bottom map button -->
@@ -614,7 +614,7 @@ window.addEventListener('scroll',function(){
     if(diff<=0){document.getElementById('cd-days').textContent='🌺';document.getElementById('cd-sub').textContent="It's time!";return;}
     var days=Math.ceil(diff/(1000*60*60*24));
     document.getElementById('cd-days').textContent=days;
-    document.getElementById('cd-sub').textContent='until July 23, 2026';
+    document.getElementById('cd-sub').textContent='';
   }
   tick();setInterval(tick,60000);
 })();
