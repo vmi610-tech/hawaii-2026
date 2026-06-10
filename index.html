@@ -679,24 +679,24 @@ var WX_LOCS=[
 ];
 function wmoDesc(code){
   if(code===0)return{text:'Clear & Sunny',sky:'sunny',icon:'☀️'};
-  if(code<=2)return{text:'Partly Cloudy',sky:'partly_cloudy',icon:'⛅'};
-  if(code<=3)return{text:'Mostly Cloudy',sky:'cloudy',icon:'☁️'};
+  if(code<=3)return{text:'Partly Cloudy',sky:'partly_cloudy',icon:'⛅'};
+  if(code<=45)return{text:'Cloudy',sky:'cloudy',icon:'☁️'};
   if(code<=55)return{text:'Drizzle',sky:'rain',icon:'🌦️'};
   if(code<=65)return{text:'Rain',sky:'rain',icon:'🌧️'};
   return{text:'Showers',sky:'rain',icon:'🌦️'};
 }
 WX_LOCS.forEach(function(loc){
-  fetch('https://api.open-meteo.com/v1/forecast?latitude='+loc.lat+'&longitude='+loc.lon+'&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=Pacific%2FHonolulu')
+  fetch('https://api.open-meteo.com/v1/forecast?latitude='+loc.lat+'&longitude='+loc.lon+'&current=temperature_2m,weather_code,wind_speed_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=Pacific%2FHonolulu&cell_selection=sea')
     .then(function(r){return r.json();})
     .then(function(data){
       var cur=data.current,cond=wmoDesc(cur.weather_code);
-      var temp=Math.round(cur.temperature_2m),hum=Math.round(cur.relative_humidity_2m),wind=Math.round(cur.wind_speed_10m);
+      var temp=Math.round(cur.temperature_2m),wind=Math.round(cur.wind_speed_10m);
       document.getElementById('wx-load-'+loc.id).style.display='none';
       var el=document.getElementById('wx-'+loc.id);
       el.style.display='block';
       el.innerHTML='<div class="wx-temp">'+temp+'°</div>'
         +'<div class="wx-right"><div class="wx-desc">'+cond.icon+' '+cond.text+'</div>'
-        +'<div class="wx-meta"><span class="wx-detail">'+loc.label+' · '+loc.sub+'</span><span class="wx-detail">💧'+hum+'%</span><span class="wx-detail">💨'+wind+'mph</span></div></div>';
+        +'<div class="wx-meta"><span class="wx-detail">'+loc.label+' · '+loc.sub+'</span><span class="wx-detail">💨'+wind+'mph</span></div></div>';
       SkyScene('sky-'+loc.id,cond.sky);
     })
     .catch(function(){
