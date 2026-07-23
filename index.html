@@ -140,8 +140,9 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
 .ticket-outer.active{display:flex;flex-direction:column}
 .ticket-bar{display:flex;justify-content:flex-end;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;background:#111}
 .ticket-close{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:.85rem;font-weight:600}
-.ticket-frame-wrap{flex:1}
+.ticket-frame-wrap{flex:1;display:flex;align-items:center;justify-content:center;overflow:auto}
 .ticket-frame-wrap iframe{width:100%;height:100%;border:none}
+.ticket-frame-wrap img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 .map-island-toggle{display:flex;gap:8px;margin-bottom:14px}
 .mit-btn{flex:1;padding:10px 0;border-radius:12px;border:2px solid var(--sand-dark);background:var(--white);color:var(--ink-soft);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s}
 .mit-btn.active{background:var(--ocean);color:white;border-color:var(--ocean)}
@@ -609,19 +610,32 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
 <!-- Ticket viewer overlay -->
 <div class="ticket-outer" id="ticket-tab">
   <div class="ticket-bar"><button class="ticket-close" onclick="closeTicket()">✕ Close</button></div>
-  <div class="ticket-frame-wrap"><iframe id="ticket-iframe" src=""></iframe></div>
+  <div class="ticket-frame-wrap">
+    <iframe id="ticket-iframe" src="" style="display:none"></iframe>
+    <img id="ticket-img" src="" style="display:none">
+  </div>
 </div>
 
 <script>
 function toggleHana(h){h.closest('.hana-section').classList.toggle('open')}
 function toggleDay(h){h.closest('.day-card').classList.toggle('open')}
 function openTicket(url){
-  document.getElementById('ticket-iframe').src=url;
+  var isImage=/\.(jpe?g|png|gif|webp)$/i.test(url);
+  var frame=document.getElementById('ticket-iframe');
+  var img=document.getElementById('ticket-img');
+  if(isImage){
+    frame.style.display='none'; frame.src='';
+    img.src=url; img.style.display='block';
+  }else{
+    img.style.display='none'; img.src='';
+    frame.src=url; frame.style.display='block';
+  }
   document.getElementById('ticket-tab').classList.add('active');
 }
 function closeTicket(){
   document.getElementById('ticket-tab').classList.remove('active');
   document.getElementById('ticket-iframe').src='';
+  document.getElementById('ticket-img').src='';
 }
 var mapOpen=false;
 function jumpToDay(id){
