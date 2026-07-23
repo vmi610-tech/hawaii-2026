@@ -201,9 +201,9 @@ bb-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)
   <span class="hero-emoji">🌺</span>
   <h1>Hawaii 2026</h1>
   <p class="hero-sub">July 23 – August 5 &nbsp;·&nbsp; Iacovelli</p>
-  <div class="countdown-strip">
-    <div class="cd-label">Aloha in</div>
-    <div><span class="cd-num" id="cd-days">--</span><span class="cd-unit">days</span></div>
+  <div class="countdown-strip" id="countdown-strip">
+    <div class="cd-label" id="cd-label">Aloha in</div>
+    <div id="cd-numwrap"><span class="cd-num" id="cd-days">--</span><span class="cd-unit" id="cd-unit">days</span></div>
   </div>
   <div class="hotel-chips" style="margin-top:16px">
     <div class="hotel-chip" onclick="jumpToDay('jul23')"><span>📍</span> Outrigger Reef Waikiki · Jul 23–28</div>
@@ -668,11 +668,25 @@ window.addEventListener('scroll',function(){
 // ── Countdown ──────────────────────────────────────────────
 (function(){
   function tick(){
-    var target=new Date('2026-07-23T00:00:00-10:00');
-    var diff=target-new Date();
-    if(diff<=0){document.getElementById('cd-days').textContent='🌺';return;}
+    var depart=new Date('2026-07-23T00:00:00-10:00');
+    var nextDay=new Date('2026-07-24T00:00:00-10:00');
+    var now=new Date();
+    var strip=document.getElementById('countdown-strip');
+    if(now>=nextDay){
+      strip.style.display='none';
+      return;
+    }
+    if(now>=depart){
+      document.getElementById('cd-label').textContent='Wheels up! ✈️🌺';
+      document.getElementById('cd-numwrap').style.display='none';
+      return;
+    }
+    var diff=depart-now;
     var days=Math.ceil(diff/(1000*60*60*24));
+    document.getElementById('cd-label').textContent='Aloha in';
+    document.getElementById('cd-numwrap').style.display='';
     document.getElementById('cd-days').textContent=days;
+    document.getElementById('cd-unit').textContent='days';
   }
   tick();setInterval(tick,60000);
 })();
